@@ -9,7 +9,7 @@ import java.util.Arrays;
  * 
  * Idea: Pick an element of an array as the "pivot". Start from the leftmost element and keep
  * track of the index of smaller elements as "i". Iterate through the array with "current". If
- * "current" is smaller than "i", swap current and i. Else, do nothing.
+ * "current" is smaller than "i", swap current and i, then increment i. Else, do nothing.
  * Once you reach the end, swap element i+1 and the pivot. The pivot is now in its "sorted" position at i+1.
  * Apply recursion to the smaller elements left of the pivot (pivot_index - 1) and right of the pivot
  * (pivot_index + 1).

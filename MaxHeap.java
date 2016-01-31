@@ -11,7 +11,12 @@ public class MaxHeap {
 	
 	// Sort Method (Main)
 	public static void sort(int[] array) {
+		
+		// Build the heap (parents up to root)
 		MaxHeap heap = new MaxHeap(array);
+		
+		// Sorting Process
+		// Remove the max and downsize the array by one. Repeatedly heapify the array.
 		for (int i = heap.size() - 1; i >= 0; i--) {
 			int nextMax = heap.removeNext();
 			
@@ -27,6 +32,9 @@ public class MaxHeap {
 	public MaxHeap(int array[]) {
 		this.array = array;
 		this.size = array.length;
+		
+		// Apply heapify on the parents (nodes with children)
+		// Idea: Rearranges the heap to bring the max element to the root
 		for (int i = size / 2 - 1; i >= 0; i--) {
 			heapify(i);
 		}
@@ -45,6 +53,7 @@ public class MaxHeap {
 		return next;
 	}
 	
+	// Number of nodes in the heap
 	public int size() {
 		return this.size;
 	}
@@ -75,11 +84,12 @@ public class MaxHeap {
 		// If heap consistency was locally violated
 		if (largest != i) {
 			
+			// Swap largest and i
 			int temp = array[i];
 			array[i] = array[largest];
 			array[largest] = temp;
 			
-			// Recursively heapify the affected sub-tree
+			// Recursively heapify the affected child
 			heapify(largest);
 			
 		}
