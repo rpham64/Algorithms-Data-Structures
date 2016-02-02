@@ -1,4 +1,4 @@
-package StacksQueues;
+package Stacks;
 
 /**
  * Stack Interface

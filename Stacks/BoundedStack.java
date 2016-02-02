@@ -1,4 +1,4 @@
-package StacksQueues;
+package Stacks;
 
 import java.util.NoSuchElementException;
 /**
@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * @author Rudolf
  *
  */
-public class BoundedStack implements StackInterface {
+public class BoundedStack extends Stack implements StackInterface {
 
 	private Object[] data;		// Stack array
 	private int size = 0; 	// Number of items in stack (not capacity)
@@ -36,7 +36,7 @@ public class BoundedStack implements StackInterface {
 		}
 		
 		// Add item to index size, then increment size
-		data[++size] = item;
+		data[size++] = item;
 	}
 	
 	/** Removes and returns the item at the top of the stack */

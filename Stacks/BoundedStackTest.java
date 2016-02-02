@@ -1,4 +1,4 @@
-package StacksQueues;
+package Stacks;
 
 import org.junit.Before;
 import org.junit.Test;
