@@ -20,7 +20,8 @@ public class LinkedQueue extends Queue implements QueueInterface {
 		
 		int count = 0;
 		
-		for (Node curr = head; curr != null; curr = curr.next) {
+		// Iterate through list and increment count until pointer cycles back to head (tail.next)
+		for (Node curr = head; curr == tail.next; curr = curr.next) {
 			count++;
 		}
 		
@@ -58,12 +59,12 @@ public class LinkedQueue extends Queue implements QueueInterface {
 			throw new NoSuchElementException("Queue is empty. Cannot dequeue.");
 		}
 		
-		// Save head's data to return
-		Object first = head.data;
-		
 		// Check: one element (tail = head)
 		// If so, set tail to null
 		if (tail == head) tail = null;
+		
+		// Save head's data to return
+		Object first = head.data;
 		
 		// Remove head from queue and re-assign head to head.next
 		head = head.next;
