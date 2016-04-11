@@ -1,5 +1,11 @@
 package LeetCode;
 
+/**
+ * Simple ListNode implementation that LeetCode uses
+ * 
+ * @author Rudolf
+ *
+ */
 public class ListNode {
 
 	int val;
