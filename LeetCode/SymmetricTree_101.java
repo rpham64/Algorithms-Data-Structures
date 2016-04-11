@@ -3,7 +3,8 @@ package LeetCode;
 /**
  * 101. Symmetric Tree
  * 
- * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+ * Given a binary tree, check whether it is a mirror of itself 
+ * (ie, symmetric around its center).
  * 
  * Solution: http://stackoverflow.com/a/8437158
  * 

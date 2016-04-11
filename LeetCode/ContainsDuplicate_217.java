@@ -22,7 +22,10 @@ public class ContainsDuplicate_217 {
         HashSet<Integer> visited = new HashSet<Integer>(nums.length);
         
         for (int num : nums) {
-            if (!visited.contains(num)) visited.add(num);
+        	
+            if (!visited.contains(num)) {
+            	visited.add(num);
+            }
             
             else {
                 return true;

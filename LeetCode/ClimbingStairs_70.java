@@ -16,7 +16,7 @@ public class ClimbingStairs_70 {
 	/**
      * Fibonacci Sequence
      */
-    public int climbStairs(int n) {
+    public static int climbStairs(int n) {
         
         // Input Check: if n < 0, return -1
         if (n < 0) return -1;
@@ -39,6 +39,14 @@ public class ClimbingStairs_70 {
         }
         
         return numOfSteps;
+    }
+    
+    public static void main(String[] args) {
+    	
+    	for (int i = 0; i < 10; i++) {
+    		System.out.println(i + ": " + climbStairs(i));
+    	}
+    	
     }
 	
 }

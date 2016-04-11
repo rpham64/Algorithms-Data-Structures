@@ -19,6 +19,7 @@ public class DeleteNodeInLinkedList_237 {
 		if (node == null) return;
 		
 		// Replace node's val to node.next and next node to node.next.next
+		// Idea: Replace node with its next node, then delete that next node
 		node.val = node.next.val;
 		node.next = node.next.next;
 	}

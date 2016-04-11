@@ -33,7 +33,9 @@ public class RemoveNthNodeFromEndOfList_19 {
         for (int i = 0; i < n; i++) {
             currentNode = currentNode.next;
             
-            // Edge Case: currentNode is null => n is length of linked list => delete head
+            // Edge Case: currentNode is null 
+            // => n is length of linked list 
+            // => delete head
             if (currentNode == null) {
                 head = head.next;
                 return head;

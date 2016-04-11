@@ -35,7 +35,7 @@ public class Task3 {
 		if (y < 0 || y > A[0].length) return;
 		
 		// Check: if visited val in row x column y, return
-		if (!checked[x][y]) return;
+		if (checked[x][y]) return;
 		
 		// Check: if val is not the right val
 		if (A[x][y] != val) return;
