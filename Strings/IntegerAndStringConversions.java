@@ -36,7 +36,7 @@ public class IntegerAndStringConversions {
 		}
 		
 		if (isNeg) {
-			number = -number;
+			number *= -1;
 		}
 		
 		return number;
@@ -54,6 +54,15 @@ public class IntegerAndStringConversions {
 	 */
 	public static String intToStr(int num) {
 		
+		StringBuilder word = new StringBuilder();
+		boolean isNeg = false;
+		
+		// Check: num is negative
+		if (isNeg) {
+			word.append("-");
+		}
+		
+		// Build string from num
 		
 		
 	}

@@ -1,8 +1,5 @@
 package LinkedLists;
 
-import LinkedList.LinkedListInterface;
-import LinkedList.Node;
-
 /**
  * Linked List Implementation
  * 

@@ -22,7 +22,7 @@ public class RemoveSpecifiedCharacters {
 		// Set flags for characters to be removed
 		for (char c : charsToRemove) {
 			
-			flags[c] = true;
+			flags[c] = true;	// char has number value in ASCII
 			
 		}
 		
