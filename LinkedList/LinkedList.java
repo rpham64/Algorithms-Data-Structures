@@ -55,7 +55,10 @@ public class LinkedList {
 	public void insertLast(int data) {
 		
 		// Input Check: if head is null, add data to head
-		if (head == null) insert(data);
+		if (head == null) {
+			insert(data);
+			return;
+		}
 		
 		Node newNode = new Node(data);
 		
@@ -187,13 +190,51 @@ public class LinkedList {
 		System.out.println();
 	}
 	
+	/**
+	 * Example: 
+	 * 		Input: 1 -> 2 -> 3 -> 4 -> NULL
+	 * 		Output: 1 -> 3 -> 2 -> 4 -> NULL
+	 */
+	public void merge() {
+		
+		// Input Check: empty list
+		if (head == null) return;
+		
+		// Find midpoint using "runner" technique
+		Node p1 = head;
+		Node p2 = head;
+		
+		while (p1 != null) {
+			p1 = p1.next.next;
+			p2 = p2.next;
+		}
+		
+		p1 = head;
+		
+		// p2 now at midpoint and p1 at head
+		
+		// Weaving
+		while (p2 != null) {
+			Node p1_next = p1.next;
+			Node p2_next = p2.next;
+			
+			p2.next = p1_next;
+			p1.next = p2;
+			
+			p1 = p1_next;
+			p2 = p2_next;
+		}
+		
+		// Stuck in infinite loop
+	}
+	
 	public static void main(String[] args) {
 		
-		LinkedList list = new LinkedList();
+/*		LinkedList list = new LinkedList();
 		
-		/**
+		*//**
 		 * Test #1 - Insertion
-		 */
+		 *//*
 		
 		list.insert(1);
 		list.insert(4);
@@ -207,9 +248,9 @@ public class LinkedList {
 		list.printList();
 		list.printMiddle();
 		
-		/**
+		*//**
 		 * Test #2 - Deletion
-		 */
+		 *//*
 		
 		list.delete(3);
 		list.delete(10);
@@ -218,9 +259,9 @@ public class LinkedList {
 		list.printList();
 		list.printMiddle();
 		
-		/**
+		*//**
 		 * Test #3 - Print nth from end
-		 */
+		 *//*
 		
 		System.out.println();
 		list.printNthFromEnd(0);
@@ -228,7 +269,20 @@ public class LinkedList {
 		list.printNthFromEnd(2);
 		list.printNthFromEnd(3);
 		list.printNthFromEnd(4);
-		list.printNthFromEnd(5);
+		list.printNthFromEnd(5);*/
+		
+		LinkedList sortedList = new LinkedList();
+		
+		sortedList.insertLast(1);
+		sortedList.insertLast(2);
+		sortedList.insertLast(3);
+		sortedList.insertLast(4);
+		sortedList.insertLast(5);
+		sortedList.insertLast(6);
+		
+//		sortedList.merge();
+		
+		sortedList.printList();
 	}
 	
 }

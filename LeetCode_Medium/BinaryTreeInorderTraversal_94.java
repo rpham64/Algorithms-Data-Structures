@@ -7,7 +7,7 @@ import java.util.Stack;
 import LeetCode.TreeNode;
 
 /**
- * Given a binary tree, return the preorder traversal of its nodes' values.
+ * Given a binary tree, return the inorder traversal of its nodes' values.
 
 	For example:
 	Given binary tree {1,#,2,3},
@@ -16,79 +16,81 @@ import LeetCode.TreeNode;
 	     2
 	    /
 	   3
-	return [1,2,3].
+	return [1,3,2].
 	
 	Note: Recursive solution is trivial, could you do it iteratively?
+ * 
+ * Reference: http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
  * 
  * @author Rudolf
  *
  */
-public class BinaryTreePreorderTraversal_144 {
+public class BinaryTreeInorderTraversal_94 {
 	
 	/**
-	 * Recursive Version 1
+	 * Recursive Version 1 - Using List#addAll
 	 * 
 	 * @param root
 	 * @return
 	 */
-	public List<Integer> preorderTraversal(TreeNode root) {
+	public List<Integer> inorderTraversal(TreeNode root) {
         
         List<Integer> nodes = new ArrayList<Integer>();
         
         // Input Check: empty tree
         if (root == null) return nodes;
         
+        nodes.addAll(inorderTraversal(root.left));
         nodes.add(root.val);
-        nodes.addAll(preorderTraversal(root.left));
-        nodes.addAll(preorderTraversal(root.right));
+        nodes.addAll(inorderTraversal(root.right));
         
         return nodes;
     }
-
+	
 	/**
-	 * Recursive Version 2
+	 * Recursive Version 2 - Using List#add and loops
 	 * 
 	 * @param root
 	 * @return
 	 */
-	public List<Integer> preorderTraversal_recursive(TreeNode root) {
+	public List<Integer> inorderTraversal_recursive(TreeNode root) {
         
         List<Integer> nodes = new ArrayList<Integer>();
         
         // Input Check: empty tree
         if (root == null) return nodes;
         
-        // Base Case: add root to nodes
-        nodes.add(root.val);
-        
-        // Inductive Case: Apply recursion on left subtree, then right subtree
         List<Integer> leftNodes = new ArrayList<Integer>();
         List<Integer> rightNodes = new ArrayList<Integer>();
         
         if (root.left != null) {
-            leftNodes = preorderTraversal(root.left);
+            leftNodes = inorderTraversal(root.left);
         }
         if (root.right != null) {
-            rightNodes = preorderTraversal(root.right);    
+            rightNodes = inorderTraversal(root.right);
         }
         
-        for (int leftVal : leftNodes) {
-            nodes.add(leftVal);
+        // Add node values from leftNodes, then root, then rightNodes into nodes list
+        for (int val : leftNodes) {
+            nodes.add(val);
         }
-        for (int rightVal : rightNodes) {
-            nodes.add(rightVal);
+        
+        nodes.add(root.val);
+        
+        for (int val : rightNodes) {
+            nodes.add(val);
         }
         
         return nodes;
     }
-	
+
 	/**
 	 * Iterative Version
 	 * 
 	 * @param root
 	 * @return
 	 */
-	public List<Integer> preorderTraversal_ITERATIVE(TreeNode root) {
+	public List<Integer> inorderTraversal_ITERATIVE(TreeNode root) {
         
         List<Integer> nodes = new ArrayList<Integer>();
         Stack<TreeNode> stack = new Stack<TreeNode>();
@@ -96,22 +98,32 @@ public class BinaryTreePreorderTraversal_144 {
         // Input Check: empty tree
         if (root == null) return nodes;
         
-        stack.push(root);
+        TreeNode current = root;
+        
+        // Repeatedly push leftmost nodes to stack
+        while (current != null) {
+            stack.push(current);
+            current = current.left;
+        }
         
         while (!stack.empty()) {
             
-            TreeNode current = stack.pop();
+            current = stack.pop();
             
+            // Add current to nodes list
             nodes.add(current.val);
             
             if (current.right != null) {
-                stack.push(current.right);
+                
+                current = current.right;
+                
+                // Repeatedly push leftmost nodes to stack
+                while (current != null) {
+                    stack.push(current);
+                    current = current.left;
+                }
+                
             }
-            
-            if (current.left != null) {
-                stack.push(current.left);
-            }
-            
         }
         
         return nodes;
