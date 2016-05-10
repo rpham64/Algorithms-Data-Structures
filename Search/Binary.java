@@ -40,9 +40,13 @@ public class Binary {
 			
 			// If num is less than the middle element, set high = mid - 1
 			// If num is greater than the middle element, set low = mid + 1
-			if (num < data[mid]) { high = mid - 1; }
+			if (num < data[mid]) { 
+				high = mid - 1; 
+			}
 			
-			else if (num > data[mid]) { low = mid + 1; }
+			else if (num > data[mid]) { 
+				low = mid + 1; 
+			}
 			
 		}
 
