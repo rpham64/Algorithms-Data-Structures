@@ -5,53 +5,50 @@ import java.util.HashSet;
 /**
  * Write code to remove duplicates from an unsorted linked list.
  * 
-	FOLLOW UP
-	How would you solve this problem if a temporary buffer is not allowed?
- * 
- * 
  * @author Rudolf
  *
  */
-public class Q2_1 {
+public class Q2_1b {
 
-	/** Answer 1: Using HashSet => Time: O(n), Space: O(n) */
 	public ListNode removeDuplicates(ListNode head) {
 		
-		// Empty list OR 1 node
+		// Input Check: empty list OR 1 node
 		if (head == null || head.next == null) return head;
+		
+		ListNode dummy = new ListNode(0);
 		
 		HashSet<Integer> visited = new HashSet<>();
 		
-		ListNode prev = null;
+		ListNode prev = dummy;
 		ListNode current = head;
+		
+		dummy.next = head;
 		
 		while (current != null) {
 			
 			if (visited.contains(current.val)) {
 				
-				// Delete current
 				prev.next = current.next;
 				
 			} else {
 				
-				// Add current to hashset
 				visited.add(current.val);
-				prev = current;
+				
+				prev = prev.next;
 				
 			}
 			
-			// Iterate current
 			current = current.next;
-			
 		}
 		
-		return head;
+		return dummy.next;
 	}
 	
-	/** Answer 2: No temporary buffer => O(n²) time, O(1) space */
-	public ListNode removeDuplicates2(ListNode head) {
+	// FOLLOW UP: Solve without a temporary buffer
+	
+	public ListNode removeDuplicatesWithoutBuffer(ListNode head) {
 		
-		// Empty list OR 1 node
+		// Input Check: empty list OR 1 node
 		if (head == null || head.next == null) return head;
 		
 		ListNode current = head;
@@ -60,12 +57,17 @@ public class Q2_1 {
 			
 			ListNode runner = current;
 			
-			while (runner.next != null) {
+			while (runner != null && runner.next != null) {
 				
 				if (runner.next.val == current.val) {
+					
+					// Delete runner.next
 					runner.next = runner.next.next;
+					
 				} else {
+					
 					runner = runner.next;
+					
 				}
 				
 			}
