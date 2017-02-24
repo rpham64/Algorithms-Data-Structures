@@ -33,6 +33,7 @@ public class RemoveSpecifiedCharacters {
 			if (!flags[c]) {
 				
 				originalString[current++] = c;
+				System.out.println(originalString);
 				
 			}
 			

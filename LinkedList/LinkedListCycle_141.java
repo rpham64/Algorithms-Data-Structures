@@ -11,6 +11,7 @@ public class LinkedListCycle_141 {
         ListNode fast = head;
         ListNode slow = head;
         
+        // fast.next and fast.next.next is FASTER (SERIOUSLY LEETCODE WTF)
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;

@@ -70,14 +70,14 @@ public class BinaryTrees {
 		return size(root);
 	}
 	
-	public int size(TreeNode node) {
+	public int size(TreeNode root) {
 		
 		// Input Check: if node is null, return 0
-		if (node == null) return 0;
+		if (root == null) return 0;
 		
 		// Total size = 
 		//		size of left subtree + root + size of right subtree
-		return size(node.left) + 1 + size(node.right);	
+		return size(root.left) + 1 + size(root.right);	
 	}
 	
 	/**
@@ -91,13 +91,13 @@ public class BinaryTrees {
 		return maxDepth(root);
 	}
 	
-	public int maxDepth(TreeNode node) {
+	public int maxDepth(TreeNode root) {
 		
 		// Input Check: if node is null, return 0
-		if (node == null) return 0;
+		if (root == null) return 0;
 		
-		int leftDepth = maxDepth(node.left);
-		int rightDepth = maxDepth(node.right);
+		int leftDepth = maxDepth(root.left);
+		int rightDepth = maxDepth(root.right);
 		
 		return 1 + Math.max(leftDepth, rightDepth);
 	}
@@ -119,6 +119,26 @@ public class BinaryTrees {
 		
 		while (current.left != null) {
 			current = current.left;
+		}
+		
+		return current.val;
+	}
+	
+	/**
+	 * Returns the max value of a non-empty BST
+	 * 
+	 * @return
+	 */
+	public int maxValue() {
+		return maxValue(root);
+	}
+	
+	public int maxValue(TreeNode root) {
+		
+		TreeNode current = root;
+		
+		while (current.right != null) {
+			current = current.right;
 		}
 		
 		return current.val;

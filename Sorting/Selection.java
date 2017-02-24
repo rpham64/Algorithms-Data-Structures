@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Selection Sort Algorithm
  * 
  * Idea: swap current with minimum element 
- * Running Time: O(n²) (Worst, Average & Best)
+ * Running Time: O(n^2) (Worst, Average & Best)
  * Auxiliary Space: O(1)
  * 
  * @author Rudolf

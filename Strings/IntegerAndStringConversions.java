@@ -1,14 +1,16 @@
 package Strings;
 
 public class IntegerAndStringConversions {
+	
+	public static final int MAX_DIGITS = 10;
 
 	/**
 	 * Pseudocode:
 	 * 
-	 * Start number at 0
+	 * Start counter at 0
 	 * if first character is '-'
 	 * 		Set negative flag to true
-	 * 		Increment character index
+	 * 		Increment counter
 	 * for each character in string
 	 * 		Multiply number by 10
 	 * 		Add digit (digit char - '0') to number
@@ -22,18 +24,22 @@ public class IntegerAndStringConversions {
 	public static int strToInt(String str) {
 		
 		int number = 0;
+		int index = 0;
 		boolean isNeg = false;
 		
-		if (str.charAt(0) == '-') {
+		if (str.charAt(index) == '-') {
 			isNeg = true;
+			index++;
 		}
 		
-		for (int i = 1; i < str.length(); ++i) {
+		while (index < str.length()) {
 			
-			char c = str.charAt(i);
+			char c = str.charAt(index);
 			
 			number *= 10;
 			number += c - '0';
+			
+			index++;
 		}
 		
 		if (isNeg) {
@@ -63,14 +69,13 @@ public class IntegerAndStringConversions {
 	 */
 	public static String intToStr(int num) {
 		
-		// Input Check: negative number
-		int MAX_DIGITS = 10;	// int max/min has 10 digits
 		int i = 0;
 		boolean isNeg = false;
 		char[] digits = new char[MAX_DIGITS + 1];
 		
+		// Input Check: negative number
 		if (num < 0) {
-			num *= -1;		// Change to positive in case of errors
+			num *= -1;		// Change to positive in case of errors using modulo
 			isNeg = true;
 		}
 		
@@ -85,8 +90,8 @@ public class IntegerAndStringConversions {
 			builder.append('-');
 		}
 		
-		while (i >= 0) {
-			builder.append(digits[i--]);
+		while (i > 0) {
+			builder.append(digits[--i]);
 		}
 		
 		return builder.toString();

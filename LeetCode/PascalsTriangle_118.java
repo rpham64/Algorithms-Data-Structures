@@ -34,7 +34,7 @@ public class PascalsTriangle_118 {
     }
 	
 	/** Method 2 - Adding previous row elements */
-	public List<List<Integer>> createTriangle(int numRows) {
+	public static List<List<Integer>> createTriangle(int numRows) {
         
         List<List<Integer>> pascal = new ArrayList<>();
         
@@ -66,6 +66,7 @@ public class PascalsTriangle_118 {
 		int numRows = 9;
 		
 		generate(numRows);
+//		createTriangle(numRows);
 		
 	}
 	
