@@ -6,7 +6,7 @@ package LeetCode;
  * 
  * According to the definition of LCA on Wikipedia: “The lowest common ancestor 
  * is defined between two nodes v and w as the lowest node in T that has both 
- * v and w as descendants (where we allow a node to be a descendant of itself).”
+ * v and w as descendants (where we allow a node to be a descendant of itself).
  * 
  * Solution: http://www.fusu.us/2013/06/p2-lowest-common-ancestor-in-binary-tree.html
  * 
@@ -14,8 +14,49 @@ package LeetCode;
  *
  */
 public class LowestCommonAncestorOfBST_235 {
+	
+    /**
+     * Cases:
+     *      1) If root.val is greater than p's and q's, apply recursion on root.left
+     *      2) Else, if root.val is less than p's and q's, apply recursion on root.right
+     *      3) Else,
+     *          a) root.val equals p's or q's
+     *              => root is LCA
+     *          b) root.val < p's but root.val > q's, meaning both p and q are in separate subtrees
+     *              => root is LCA
+     *              
+     *  
+     * Time Complexity: O(log n)
+     * Space Complexity: O(1)
+     * 
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        
+        // Null Check
+        if (root == null) return root;
+        
+        // Case 1
+        if (root.val > p.val && root.val > q.val) return lowestCommonAncestor(root.left, p, q);
+        
+        // Case 2
+        if (root.val < p.val && root.val < q.val) return lowestCommonAncestor(root.right, p, q);
+        
+        // Case 3
+        return root;
+    }
 
-	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    /**
+     * This method is equivalent to searching for the LCA for a Binary Tree.
+     * 
+     * Time complexity: O(n)
+     * Space Complexity: O(1)
+     * 
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+	public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
         
         // Check: Empty tree
         if (root == null) return null;
