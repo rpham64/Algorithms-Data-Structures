@@ -15,6 +15,57 @@ public class BinaryTrees {
 		root = null;
 	}
 	
+	public void BinaryTree(int value) {
+		root = new TreeNode(value);
+	}
+	
+	public TreeNode getRoot() {
+		return root;
+	}
+
+	public void setRoot(TreeNode root) {
+		this.root = root;
+	}
+
+	public static void main(String[] args) {
+		
+		/**
+		 * Tree Example:
+		 * 				8			- Depth 0, Height 3
+		 * 			   / \
+		 * 			  3  10			- Depth 1, Height 2 (height of 3 is 2)
+		 *           / \   \
+		 *          1   6   14      - Depth 2, Height 1	(height of 1 is 0)
+		 *             / \  /
+		 *            4  7 13		- Depth 3, Height 0
+		 *            
+		 *            
+		 *	Height (max) = 3
+		 *	Depth (max) = 3
+		 * 
+		 */
+		
+		BinaryTrees test = new BinaryTrees();
+		TreeNode root = new TreeNode(8);
+		root.left = new TreeNode(3);
+		root.right = new TreeNode(10);
+		root.left.left = new TreeNode(1);
+		root.left.right = new TreeNode(6);
+		root.right.right = new TreeNode(14);
+		root.left.right.left = new TreeNode(4);
+		root.left.right.right = new TreeNode(7);
+		root.right.right.left = new TreeNode(13);
+		test.setRoot(root);
+		
+		test.printInOrder();
+		test.printPreOrder();
+		test.printPostOrder();
+		
+		System.out.println("Size: " + test.size());
+		System.out.println("Height: " + test.height());
+		System.out.println("Depth: " + test.depth());
+	}
+	
 	/**
 	 * Recursive lookup -- given a node, recur down tree
 	 * searching for the given data.
@@ -85,6 +136,49 @@ public class BinaryTrees {
 	}
 	
 	/**
+	 * Number of EDGES from a node to a leaf
+	 * 
+	 * @return
+	 */
+	public int height() {
+		return height(root);
+	}
+	
+	public int height(TreeNode root) {
+		
+		// Null Check
+		if (root == null) return -1;
+		
+		return 1 + Math.max(height(root.left), height(root.right));
+	}
+	
+    /**
+     * Number of EDGES from node to root
+     * 
+     * Cases:
+     *      1) Null tree (depth = 0)
+     *      2) Root only (depth = 1)
+     *      3) 1 or 2 children
+     *          - Return 1 + max(left depth, right depth)
+     * 
+     */
+	private int depth() {
+		return depth(root);
+	}
+	
+    private int depth(TreeNode node) {
+        
+        // Case 1
+        if (node == null) return 0;
+        
+        // Case 2
+        if (node.left == null && node.right == null) return 0;
+        
+        // Case 3
+        return 1 + Math.max(depth(node.left), depth(node.right));
+    }
+	
+	/**
 	 * Given a binary tree, find its minimum depth.
 	 * 
 	 * The minimum depth is the number of nodes along the shortest path 
@@ -99,7 +193,7 @@ public class BinaryTrees {
 	    if (root == null) return 0;
 	    
 	    // Case 2: Only root in tree
-	    if (root.left == null && root.right == null) return 1;
+	    if (root.left == null && root.right == null) return 0;
 	    
 	    // Case 3: Only one child
 	    if ((root.left != null && root.right == null) || (root.left == null && root.right != null)) {
@@ -167,49 +261,7 @@ public class BinaryTrees {
         return depth;
 		
 	}
-	
-	/**
-	 * Returns the min value of a non-empty binary search tree.
-	 * Uses a helper method that iterates to the left to
-	 * find the min value.
-	 * 
-	 * @return
-	 */
-	public int minValue() {
-		return minValue(root);
-	}
-	
-	public int minValue(TreeNode node) {
 		
-		TreeNode current = node;
-		
-		while (current.left != null) {
-			current = current.left;
-		}
-		
-		return current.val;
-	}
-	
-	/**
-	 * Returns the max value of a non-empty BST
-	 * 
-	 * @return
-	 */
-	public int maxValue() {
-		return maxValue(root);
-	}
-	
-	public int maxValue(TreeNode root) {
-		
-		TreeNode current = root;
-		
-		while (current.right != null) {
-			current = current.right;
-		}
-		
-		return current.val;
-	}
-	
 	/**
 	 * Inorder Tree Traversal
 	 * 
@@ -217,7 +269,9 @@ public class BinaryTrees {
 	 * Uses recursive helper to do the traversal.
 	 */
 	public void printInOrder() {
+		System.out.print("In order: ");
 		printInOrder(root);
+		System.out.println("");
 	}
 	
 	public void printInOrder(TreeNode node) {
@@ -238,7 +292,9 @@ public class BinaryTrees {
 	 * Uses recursive helper to do the traversal.
 	 */
 	public void printPreOrder() {
+		System.out.print("Pre Order: ");
 		printPreOrder(root);
+		System.out.println("");
 	}
 	
 	public void printPreOrder(TreeNode node) {
@@ -248,8 +304,8 @@ public class BinaryTrees {
 		
 		// Print root, then left subtree, then right subtree
 		System.out.print(node.val + " ");
-		printPostOrder(node.left);
-		printPostOrder(node.right);
+		printPreOrder(node.left);
+		printPreOrder(node.right);
 	}
 	
 	/**
@@ -259,7 +315,9 @@ public class BinaryTrees {
 	 * Uses recursive helper to do the traversal.
 	 */
 	public void printPostOrder() {
+		System.out.print("Post Order: ");
 		printPostOrder(root);
+		System.out.println("");
 	}
 	
 	public void printPostOrder(TreeNode node) {
@@ -441,22 +499,38 @@ public class BinaryTrees {
     }
     
     /**
-     * Cases:
-     *      1) Null tree (depth = 0)
-     *      2) Root only (depth = 1)
-     *      3) 1 or 2 children
-     *          - Return 1 + max(left depth, right depth)
+     * LeetCode 100. Same Tree
      * 
+     * Given two binary trees, write a function to check if they are equal or not.
+     * 
+     * Two binary trees are considered equal if they are structurally identical 
+     * and the nodes have the same value.
+     * 
+     * 
+     * 
+     * Idea: Recurse down both trees, comparing nodes.
+     * 
+     * Cases:
+     *      1) Both null (true)
+     *      2) p or q is null, but not both (false)
+     *      3) p and q are non-null
+     *          - True if every node's values in both trees are equal
+     *          - Else, false
+     * 
+     * 
+     * @param p
+     * @param q
+     * @return
      */
-    private int depth(TreeNode node) {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
         
         // Case 1
-        if (node == null) return 0;
+        if (p == null && q == null) return true;
         
         // Case 2
-        if (node.left == null && node.right == null) return 1;
+        if (p == null || q == null) return false;
         
         // Case 3
-        return 1 + Math.max(depth(node.left), depth(node.right));
+        return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 }

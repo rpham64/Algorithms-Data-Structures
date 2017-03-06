@@ -3,6 +3,23 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Given numRows, generate the first numRows of Pascal's triangle.
+
+	For example, given numRows = 5,
+	Return
+	
+	[
+	     [1],			- Row 0
+	    [1,1],			- Row 1
+	   [1,2,1],			- Row 2
+	  [1,3,3,1],		- Row 3
+	 [1,4,6,4,1]		- Row 4
+	]
+ * 
+ * @author Rudolf
+ *
+ */
 public class PascalsTriangle_118 {
 
 	/** Method 1 - Binomial Coefficients */

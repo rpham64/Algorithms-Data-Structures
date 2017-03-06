@@ -60,6 +60,9 @@ public class kthSmallestElementInBST_230 {
             // Increment and check counter
             if (++counter == k) return current.val;
             
+            // Search for successor
+            // If right is NOT null, find the min value in the right subtree
+            // Else, the successor is the next to-be-popped node on the stack
             if (current.right != null) {
                 
                 current = current.right;

@@ -18,6 +18,23 @@ import java.util.HashMap;
  *
  */
 public class TwoSum_1 {
+	
+	/**
+	 * Scenarios:
+     *      1) Compare every pair in nums (Time: O(n^2), Space: O(1))
+     *      2) Iterate through nums, use binary search to find complement (Time: O(n log n), Space: O(1))
+     *      3) If sorted array, iterate from start and end, comparing each pair of nums.
+     *          If sum is too low, iterate right from start.
+     *          If sum is too high, iterate left from end.
+     *          If sum is equal, return the two indices.
+     *              - Time: O(n)
+     *              - Space: O(1)
+     *      4) If unsorted or not sure, iterate through nums and use a hash table to keep track of visited numbers.
+     *          If hash table contains current number's complement, return their indices.
+     *              - Time: O(n)
+     *              - Space: O(n)
+     * 
+	 */
 
 	/** Data Structure used: HashTable. Time: O(n), Space: O(n) */
 	public int[] twoSum(int[] nums, int target) {

@@ -27,12 +27,12 @@ public class RotateArray_189 {
 	public void rotate2(int[] nums, int k) {
         
         // Input Check: empty array
-        if (nums.length == 0 || nums.length == 1) return;
+        if (nums == null || nums.length == 0 || nums.length == 1) return;
         
         // Idea: Reverse 0 to k, then k+1 to end,  then 0 to end
         k = k % nums.length;
         reverse(nums, 0, nums.length - 1 - k);
-        reverse(nums, nums.length - k, nums.length-1);  // Note: Better to use length - k than k + 1 due to ArryIndexOutOfBoundsException
+        reverse(nums, nums.length - k, nums.length-1);  // Note: Better to use length - k than k + 1 due to ArrayIndexOutOfBoundsException
         reverse(nums, 0, nums.length-1);
     }
     

@@ -34,7 +34,7 @@ public class ValidAnagram_242 {
     }
 	
 	/** Method 2 - Using counting array */
-	public boolean isAnagram(String s, String t) {
+	public boolean isAnagram2(String s, String t) {
         
         int[] count = new int[128];		// Number of ASCII characters
         
