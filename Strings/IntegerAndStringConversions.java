@@ -1,5 +1,12 @@
 package Strings;
 
+/**
+ * Formula: digit (int) = char - '0'
+ * 			char = digit + '0'
+ * 
+ * @author Rudolf
+ *
+ */
 public class IntegerAndStringConversions {
 	
 	public static final int MAX_DIGITS = 10;

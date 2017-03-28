@@ -13,7 +13,7 @@ public class LongestPalindromicSubstring_5 {
      *      4) "abccbad"        s = "abccba"
      *      5) "aaaabcaaaaa"    s = "aaaaa"
      * 
-     * Idea: For each character in s, check if that character is the middle of a palindromic substring.
+     * Idea: For each character in s, assume that that character is the middle of a palindromic substring.
      *      In other words, from that character, iterate left and right and compare the two characters. 
      *      If it's a match, extend left and right until they are no longer the same. This is then the current palindromic substring.
      *      If this substring's length is longer than the stored "maxLength", increment the "start" index and store the new maxLength.

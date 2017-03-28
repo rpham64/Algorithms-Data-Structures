@@ -14,11 +14,17 @@ public class Amazon {
 		
 		List<String> words2 = new ArrayList<>(Arrays.asList("racecars", "racecar", "tacocat", "tacoocat", "hello", "a", "b", "c"));
 		System.out.println("Longest palindrome: " + test.getLargestPalindrome(words2));
-	tacocat
-	hello
-	a
-	b
-	c*/
+	}
+	
+	/*
+	 * racecar
+	 * tacocat
+	 * hello
+	 * a
+	 * b
+	 * c
+	 * 
+	 */
 
 	/**
 	 * Cases:

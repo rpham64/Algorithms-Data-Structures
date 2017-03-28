@@ -29,7 +29,7 @@ public class Binary {
 		
 		// Set low to 0, high to length of data array
 		int low = 0;
-		int high = data.length;
+		int high = data.length - 1;
 		
 		// Check: low <= high
 		while (low <= high) {
