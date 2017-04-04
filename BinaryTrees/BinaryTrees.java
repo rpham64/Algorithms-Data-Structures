@@ -42,7 +42,7 @@ public class BinaryTrees {
 		 *            
 		 *	Height (max) = 3
 		 *	Depth (max) = 3
-		 * 
+		 * 	Root only => depth = 1
 		 */
 		
 		BinaryTrees test = new BinaryTrees();
@@ -57,6 +57,9 @@ public class BinaryTrees {
 		root.right.right.left = new TreeNode(13);
 		test.setRoot(root);
 		
+		test.DFS(root);
+		test.BFS(root);
+		
 		test.printInOrder();
 		test.printPreOrder();
 		test.printPostOrder();
@@ -65,6 +68,67 @@ public class BinaryTrees {
 		System.out.println("Height: " + test.height());
 		System.out.println("Depth: " + test.depth());
 	}
+	
+	/**
+	 * Simple implementation of Depth First Search
+	 * 
+	 * @param root
+	 * @return
+	 */
+    public TreeNode DFS(TreeNode root) {
+    	
+    	// Null Check: root is null
+    	if (root == null) return root;
+    	
+    	Stack<TreeNode> stack = new Stack<>();
+    	
+    	stack.push(root);
+    	
+    	while (!stack.isEmpty()) {
+    		
+    		TreeNode current = stack.pop();
+    		
+    		// Do something with current
+    		System.out.println("Current: " + current.val);
+    		
+    		// Add current's children
+    		// If left-to-right, push right, then left
+    		// If right-to-left, push left, then right
+    		if (current.right != null) stack.push(current.right);
+    		if (current.left != null) stack.push(current.left);
+    	}
+    	
+    	return root;
+    }
+    
+    public TreeNode BFS(TreeNode root) {
+    	
+    	// Null Check: root is null
+    	if (root == null) return root;
+    	
+    	Queue<TreeNode> queue = new LinkedList<>();		// Since Queue is abstract and cannot be instantiated
+    	
+    	queue.offer(root);
+    	
+    	while (!queue.isEmpty()) {
+    		
+    		int levelSize = queue.size();		// Number of nodes in current level
+    		
+    		for (int i = 0; i < levelSize; ++i) {
+    			
+    			TreeNode current = queue.poll();
+    			
+    			// Do something with current
+    			System.out.println("Current: " + current.val);
+    			
+    			// Add current's children
+    			if (current.left != null) queue.offer(current.left);
+    			if (current.right != null) queue.offer(current.right);
+    		}
+    	}
+    	
+    	return root;
+    }
 	
 	/**
 	 * Recursive lookup -- given a node, recur down tree

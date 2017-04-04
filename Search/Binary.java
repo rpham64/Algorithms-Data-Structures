@@ -34,6 +34,19 @@ public class Binary {
 		// Check: low <= high
 		while (low <= high) {
 			
+			/**
+			 * Note: 3 different ways to get mid
+			 * 		1) mid = (low + high) / 2
+			 * 			- Problem: If both low and high are very big, then you'll run into overflow.
+			 * 		2) mid = low + (high - low) / 2
+			 * 			- No overflow problem
+			 * 			- Source: http://stackoverflow.com/questions/27167943/why-leftright-left-2-will-not-overflow
+			 * 		3) mid = (low + high) >>> 1
+			 * 			- Uses bit shift operator to shift the number right by 1 
+			 * 			- Equivalent to dividing by 2
+			 * 			- Also avoids overflow
+			 * 
+			 */
 			int mid = (low + high) / 2;
 			
 			if (data[mid] == num) return mid;

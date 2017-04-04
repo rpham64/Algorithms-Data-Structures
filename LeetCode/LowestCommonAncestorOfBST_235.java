@@ -17,17 +17,11 @@ public class LowestCommonAncestorOfBST_235 {
 	
     /**
      * Cases:
-     *      1) If root.val is greater than p's and q's, apply recursion on root.left
-     *      2) Else, if root.val is less than p's and q's, apply recursion on root.right
-     *      3) Else,
-     *          a) root.val equals p's or q's
-     *              => root is LCA
-     *          b) root.val < p's but root.val > q's, meaning both p and q are in separate subtrees
-     *              => root is LCA
-     *              
-     *  
-     * Time Complexity: O(log n)
-     * Space Complexity: O(1)
+     *      1) Empty tree (root null, so return root)
+     *      2) Either p or q is root (root == p or root == q, so return root)
+     *      3) If p and q are greater than root, call lowestCommonAncestor on root.right
+     *      4) If p and q are less than root, call lowestCommonAncestor on root.left
+     *      5) If p < root < q, or q < root < p (return root)
      * 
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
