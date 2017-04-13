@@ -24,7 +24,7 @@ public class TRICK_FindSubstring {
 		int end = 0;							// Right bound
 		int minStart = 0;						// Guaranteed left bound
 		int minLength = Integer.MAX_VALUE;		// Minimum length of substring
-		int counter = t.length();				// Number of valid characters in window (s.length > t.length)
+		int counter = t.length();				// Number of valid characters in window
 		
 		// Step 1: Fill count array using String t
 		for (char c : t.toCharArray()) count[c]++;

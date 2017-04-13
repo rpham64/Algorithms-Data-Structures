@@ -13,8 +13,69 @@ package DynamicProgramming;
  *
  */
 public class MinimumPathSum_64 {
+	
+	/**
+	 * In-place Solution
+	 * 
+	 * Time: O(mn) where m is number of rows, n is number of cols
+	 * Space: O(1)
+	 * 
+     * Variables:
+     *      int rows = grid.length      (num of rows)
+     *      int cols = grid[0].length   (num of cols)
+     * 
+     * Algorithm:
+     *      1)  Fill top row (row = 0) with sums:
+     *              For each int in top row, add current int with previous
+     *      2)  Fill leftmost column (col = 0) with sums:
+     *              For each int in leftmost column, iterate down and add current int with previous 
+     *      3)  Fill rest of grid by adding current int with minimum of int above (row - 1) or int left (col - 1)
+     *      4)  Return bottom right int as the answer (grid[m-1][n-1] where m is number of rows, n is number of columns)
+     * 
+     * Cases:
+     *      1)  Empty OR null grid (return 0)
+     *      2)  1x1 grid (return grid[0][0])
+     *      3)  mxn grid (see algorithm above)
+     */
+    public int minPathSum(int[][] grid) {
+        
+        // Case 1
+        if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;
+        
+        // Case 2
+        if (grid.length == 1 && grid[0].length == 1) return grid[0][0];
+        
+        // Case 3
+        int rows = grid.length;
+        int cols = grid[0].length;
+        
+        // Step 1
+        for (int n = 1; n < cols; ++n) {
+            grid[0][n] += grid[0][n-1];
+        }
+        
+        // Step 2
+        for (int m = 1; m < rows; ++m) {
+            grid[m][0] += grid[m-1][0];
+        }
+        
+        // Step 3
+        for (int m = 1; m < rows; ++m) {
+            for (int n = 1; n < cols; ++n) {
+                grid[m][n] += Math.min(grid[m-1][n], grid[m][n-1]);
+            }
+        }
+        
+        // Step 4
+        return grid[rows-1][cols-1];
+    }
 
     /**
+     * Solution using Space
+     * 
+     * Time: O(mn)
+     * Space: O(mn)
+     * 
      * Cases:
      *      1) Empty grid (return 0)
      *      2) 1 element (return element val)
@@ -32,7 +93,7 @@ public class MinimumPathSum_64 {
      * 
      * Return: sum[rows - 1][cols - 1]
      */
-    public int minPathSum(int[][] grid) {
+    public int minPathSum2(int[][] grid) {
         
         // Case 1
         if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;

@@ -57,16 +57,18 @@ public class BinaryTrees {
 		root.right.right.left = new TreeNode(13);
 		test.setRoot(root);
 		
-		test.DFS(root);
-		test.BFS(root);
-		
-		test.printInOrder();
-		test.printPreOrder();
-		test.printPostOrder();
-		
-		System.out.println("Size: " + test.size());
-		System.out.println("Height: " + test.height());
-		System.out.println("Depth: " + test.depth());
+		/** Methods */
+//		test.DFS(root);
+//		test.BFS(root);
+//		
+//		test.printInOrder();
+//		test.printPreOrder();
+//		test.printPostOrder();
+//		
+//		System.out.println("Size: " + test.size());
+//		System.out.println("Height: " + test.height());
+//		System.out.println("Depth: " + test.depth());
+		test.hasPathSum(21);
 	}
 	
 	/**
@@ -418,13 +420,15 @@ public class BinaryTrees {
 		return hasPathSum(root, sum);
 	}
 	
-	public boolean hasPathSum(TreeNode node, int sum) {
+	public boolean hasPathSum(TreeNode root, int sum) {
 		
         // Case 1
         if (root == null) return false;
         
         // Case 2
         sum -= root.val;
+        
+        System.out.println("Sum at node " + root.val + ": " + sum);
         
         if (root.left == null && root.right == null && sum == 0) return true;
         

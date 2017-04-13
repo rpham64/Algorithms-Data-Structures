@@ -71,39 +71,77 @@ public class FindAllAnagramsInAString_438 {
         return result;
     }
     
-    public static String minWindow(String s, String t) {
-        String result = "";
-        if(s==""||t.length()>s.length())
-            return result;
-        int[] map = new int[128];
+    /**
+     * Sliding Window Solution
+     * 
+     * Time: O(n + m) where n is length of s, m is length of p
+     * 
+     * Variables:
+     *      List<Integer> result
+     *      int[] count (size = 128 for standard ascii, 256 for extended)(for tracking char frequencies)
+     *      int start = 0       (left pointer)
+     *      int end = 0         (right pointer)
+     *      int counter = 0     (keeps track of number of valid chars)
+     * 
+     * Algorithm:
+     *      1)  Iterate through p and increment its char's counts in count[]
+     *      2)  Loop while end is less than s.length
+     *              If current char's count >= 1 (found valid char from p), increment counter
+     *              Decrement current char's count
+     *              Increment end
+     *      3)  Check if current window's length equals p.length (end - start = p.length)
+     *              If so, check if counter equals p.length
+     *                  If true, add int start to List result
+     *              If count of char at start is >= 0 (found valid char from p), decrement counter
+     *              Increment start char's count
+     *              Increment start
+     *      4)  Return result
+     * 
+     * Idea between steps 2 and 3: All "invalid" chars have count less than 0, while the "valid" chars from p have count >= 0.
+     * 
+     * Cases:
+     *      1)  s is empty OR null, and p is NULL (return empty list)
+     *      2)  s.length > p.length (return empty list since s.length should be greater than p.length)
+     *      3)  s.length >= p.length (see algorithm)
+     */
+    public List<Integer> findAnagrams2(String s, String p) {
+        
+        // Cases 1 and 2
+        if (s == null || s.length() == 0 || p == null || s.length() < p.length()) return new ArrayList<Integer>();
+        
+        // Case 3
+        List<Integer> result = new ArrayList<>();
+        int[] count = new int[128];
         int start = 0;
-        int minStart = 0;
         int end = 0;
-        int count = t.length();
-        int minLength = Integer.MAX_VALUE;
-        for(char temp:t.toCharArray()){
-            map[temp]++;
-        }
-        while(end<s.length()){
-            if(map[s.charAt(end)]>0)
-                count--;
-            map[s.charAt(end)]--;
+        int counter = 0;
+        
+        // Step 1
+        for (char c : p.toCharArray()) count[c]++;
+        
+        // Step 2
+        while (end < s.length()) {
+            
+            char charEnd = s.charAt(end);
+            
+            if (count[charEnd] >= 1) counter++;
+            count[charEnd]--;
             end++;
-            while(count==0){
-    			if (end - start < minLength) {
-    				minStart = start;
-    				minLength = end - start;
-    			}
-    			map[s.charAt(start)]++;
-    			if (map[s.charAt(start)] > 0)
-    				count++;
-    			start++;
+            
+            // Step 3
+            if (end - start == p.length()) {		// Found correct window size
+                
+                if (counter == p.length()) result.add(start);
+                
+                char charStart = s.charAt(start);
+                
+                if (count[charStart] >= 0) counter--;
+                count[charStart]++;
+                start++;
             }
         }
-        return (minLength==Integer.MAX_VALUE)?"":s.substring(minStart, minStart+minLength);
-    }
-    
-    public static void main(String[] args) {
-    	System.out.println("String: " + minWindow("substring", "sub"));
+        
+        // Step 4
+        return result;
     }
 }

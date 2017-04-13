@@ -12,47 +12,95 @@ package LinkedList;
  */
 public class MergeTwoSortedLists_21 {
 	
-	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+	/**
+     * Variables:
+     *      ListNode head
+     *      ListNode p          (pointer for connecting list1 and list2)
+     * 
+     * Algorithm:
+     *      1) Initialize Variables:
+     *              If l1.val < l2.val
+     *                  p = l1
+     *                  l1 = l1.next
+     *              Else
+     *                  p = l2
+     *                  l2 = l2.next
+     *          Set head := p
+     *      2) Compare nodes at l1 and l2 until l1 or l2 is null:
+     *              If node at l1 < node at l2
+     *                  p.next = l1
+     *                  l1 = l1.next
+     *              Else (node at l2 < node at l1)
+     *                  p.next = l2
+     *                  l2 = l2.next
+     *              p = p.next
+     *      3)  Either l1 or l2 is null, so add rest of nodes in non-null list:
+     *              While l1 is not null    
+     *                  p.next = l1
+     *                  Set l1 -> l1.next
+     *                  p = p.next
+     *              While l2 is not null
+     *                  p.next = l2
+     *                  Set l2 -> l2.next
+     *                  p = p.next
+     *      4)  Return head
+     * 
+     * Cases:
+     *      1)  Both lists are null (return null)
+     *      2)  One list is null or empty (return other list)
+     *      3)  Both non-null and non-empty (see algorithm)
+     * 
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         
-        // Input Check: if l1 is null, return l2. Else, if l2 is null, return l1.
-        if (l1 == null) return l2;
-        if (l2 == null) return l1;
+        // Case 1
+        if (l1 == null && l2 == null) return l1;
         
-        // Determine head of new list
-        ListNode head, current;
+        // Case 2
+        if (l1 == null && l2 != null) return l2;
+        if (l1 != null && l2 == null) return l1;
+        
+        // Case 3
+        // Step 1
+        ListNode head;
+        ListNode p;
         
         if (l1.val < l2.val) {
-            current = l1;
+            p = l1;
             l1 = l1.next;
         } else {
-            current = l2;
+            p = l2;
             l2 = l2.next;
         }
         
-        head = current;
+        head = p;
         
-        // Iterate and compare nodes of both lists
-        // Connect node with smaller value to head and repeat
+        // Step 2
         while (l1 != null && l2 != null) {
             
             if (l1.val < l2.val) {
-                current.next = l1;
+                p.next = l1;
                 l1 = l1.next;
             } else {
-                current.next = l2;
+                p.next = l2;
                 l2 = l2.next;
             }
             
-            current = current.next;
+            p = p.next;
         }
         
-        if (l1 == null) {
-            current.next = l2;
-        } else if (l2 == null) {
-            current.next = l1;
+        // Step 3
+        while (l1 != null) {
+            p.next = l1;
+            l1 = l1.next;
+            p = p.next;
+        }
+        while (l2 != null) {
+            p.next = l2;
+            l2 = l2.next;
+            p = p.next;
         }
         
         return head;
     }
-
 }
