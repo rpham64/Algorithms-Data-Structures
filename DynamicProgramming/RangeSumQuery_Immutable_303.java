@@ -20,29 +20,41 @@ There are many calls to sumRange function.
  */
 public class RangeSumQuery_Immutable_303 {
 
+	/**
+	 * Idea: nums(i, j) = nums(0, j) - nums(0, i-1)
+	 */
 	public class NumArray {
-	    
-	    int[] sums;
+
+	    private int[] sums;
 
 	    public NumArray(int[] nums) {
 	        
-	        sums = nums;
+	        sums = new int[nums.length];
 	        
-	        for (int i = 1; i < nums.length; ++i) {
-	            sums[i] += sums[i-1];
+	        for (int i = 0; i < sums.length; ++i) {
+	            
+	            if (i == 0) {
+	                sums[i] = nums[i];
+	            } else {
+	                sums[i] = nums[i] + sums[i-1];
+	            }
+	            
 	        }
-	        
 	    }
-
+	    
 	    public int sumRange(int i, int j) {
-	        return i == 0 ? sums[j] : sums[j] - sums[i-1];	// ?????
+	        if (i == 0) {
+	            return sums[j];
+	        } else {
+	            return sums[j] - sums[i-1];
+	        }
 	    }
 	}
 
-
-	// Your NumArray object will be instantiated and called as such:
-	// NumArray numArray = new NumArray(nums);
-	// numArray.sumRange(0, 1);
-	// numArray.sumRange(1, 2);
+	/**
+	 * Your NumArray object will be instantiated and called as such:
+	 * NumArray obj = new NumArray(nums);
+	 * int param_1 = obj.sumRange(i,j);
+	 */
 	
 }
