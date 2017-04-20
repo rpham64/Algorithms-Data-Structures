@@ -1,4 +1,4 @@
-package LeetCode_Medium;
+package Strings;
 
 /**
  * Given a 2D board and a word, find if the word exists in the grid.

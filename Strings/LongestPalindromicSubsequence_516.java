@@ -1,4 +1,4 @@
-package LeetCode_Medium;
+package Strings;
 
 /**
  * Given a string s, find the longest palindromic subsequence's length in s. 

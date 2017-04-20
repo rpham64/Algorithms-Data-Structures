@@ -47,19 +47,28 @@ public class BinaryTrees {
 		
 		BinaryTrees test = new BinaryTrees();
 		TreeNode root = new TreeNode(8);
-		root.left = new TreeNode(3);
-		root.right = new TreeNode(10);
-		root.left.left = new TreeNode(1);
-		root.left.right = new TreeNode(6);
-		root.right.right = new TreeNode(14);
-		root.left.right.left = new TreeNode(4);
-		root.left.right.right = new TreeNode(7);
-		root.right.right.left = new TreeNode(13);
+//		root.left = new TreeNode(3);
+//		root.right = new TreeNode(10);
+//		root.left.left = new TreeNode(1);
+//		root.left.right = new TreeNode(6);
+//		root.right.right = new TreeNode(14);
+//		root.left.right.left = new TreeNode(4);
+//		root.left.right.right = new TreeNode(7);
+//		root.right.right.left = new TreeNode(13);
 		test.setRoot(root);
+		
+		test.insert(3);
+		test.insert(10);
+		test.insert(1);
+		test.insert(6);
+		test.insert(14);
+		test.insert(4);
+		test.insert(7);
+		test.insert(13);
 		
 		/** Methods */
 //		test.DFS(root);
-//		test.BFS(root);
+		test.BFS(root);
 //		
 //		test.printInOrder();
 //		test.printPreOrder();
@@ -68,7 +77,7 @@ public class BinaryTrees {
 //		System.out.println("Size: " + test.size());
 //		System.out.println("Height: " + test.height());
 //		System.out.println("Depth: " + test.depth());
-		test.hasPathSum(21);
+//		test.hasPathSum(21);
 	}
 	
 	/**
@@ -164,20 +173,41 @@ public class BinaryTrees {
 		insert(root, data);
 	}
 	
-	public TreeNode insert(TreeNode node, int data) {
+	public void insert(TreeNode node, int data) {
 		
 		// Input Check: if node is null, create new node with data
-		if (node == null) {
-			node = new TreeNode(data);
-		}
+		if (node == null) return;
 		
-		else {
-			
-			// TO BE COMPLETED
-			
-		}
+		// Since insertion is BFS-based and you want to keep a complete binary tree,
+		// apply recursion on node.left, then node.right
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(node);
 		
-		return node;
+		/**
+		 * Cases:
+		 * 		1)	Node.left
+		 * 			- Null => Create new node and return
+		 * 			- Non-null => Add to queue
+		 * 		2)	Node.right
+		 * 			- Null => Create new node and return
+		 * 			- Non-null => Add to queue
+		 */
+		while (!queue.isEmpty()) {
+			
+			TreeNode current = queue.poll();
+			
+			if (current.left == null) {
+				current.left = new TreeNode(data);
+				return;
+			}
+			if (current.right == null) {
+				current.right = new TreeNode(data);
+				return;
+			}
+			
+			queue.offer(current.left);
+			queue.offer(current.right);
+		}
 	}
 	
 	/**

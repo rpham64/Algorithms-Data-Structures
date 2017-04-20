@@ -1,4 +1,4 @@
-package LeetCode_Medium;
+package Strings;
 
 /**
  * Method 1 ( Brute Force ) 

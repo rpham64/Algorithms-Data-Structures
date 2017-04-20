@@ -1,5 +1,8 @@
 package LeetCode;
 
+import java.util.HashSet;
+import java.util.PriorityQueue;
+
 public class ThirdMaximumNumber_414 {
 
 	/**
@@ -47,5 +50,55 @@ public class ThirdMaximumNumber_414 {
         // If null, return max1
         // Else, return max3
         return max3 == null ? max1 : max3;
+    }
+    
+    /**
+     * Time Complexity: O(n log n)
+     * Space Complexity: O(n)
+     * 
+     * Variables:
+     *      PriorityQueue<Integer> queue        (size <= 3)
+     *      HashSet<Integer> visited            (for ignoring duplicates)
+     * 
+     * Algorithm:
+     *      Initialize priority queue and hashset
+     *      Loop for num in nums
+     *          If visited does not contain num
+     *              Add num to priorityqueue and hashset
+     *              If priorityqueue size > 3, poll from queue
+     *      Check if queue size < 3 (nums length < 3 or there were duplicates)
+     *          If queue size < 3
+     *              Poll from queue until size is 1
+     *      Return queue.peek
+     * 
+     * Cases:
+     *      1)  Nums is null (return 0)
+     *      2)  Nums is non-null
+     *          - If length < 3, return first maximum (Example 2)
+     *          - Else, return third maximum (Examples 1 and 3)
+     */
+    public int thirdMax2(int[] nums) {
+        
+        // Case 1
+        if (nums == null) return 0;
+        
+        // Case 2
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        HashSet<Integer> visited = new HashSet<>();
+        
+        for (int num : nums) {
+            if (!visited.contains(num)) {
+                visited.add(num);
+                queue.add(num);
+                
+                if (queue.size() > 3) queue.poll();
+            }
+        }
+        
+        if (queue.size() < 3) {
+            while (queue.size() > 1) queue.poll();
+        }
+        
+        return queue.peek();
     }
 }

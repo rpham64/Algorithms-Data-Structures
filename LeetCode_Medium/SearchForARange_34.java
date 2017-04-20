@@ -18,70 +18,90 @@ package LeetCode_Medium;
  */
 public class SearchForARange_34 {
 
-	/**
-     * Idea: Use binary search to find target in nums. 
-     *      If not found, return [-1, -1].
-     *      If found, decrement start index and increment end index until both numbers are not target.
-     *          If start < 0, add 0 to result and stop decrementing
-     *          If end = nums.length, add nums.length - 1 to result and stop incrementing
-     *      Return [start, end]
+    /**
+     * Solutions:
+     *      1)  Brute Force: Iterate through nums until you find target. Using a window, expand the right bound
+     *                      until right is out of bounds or num[right] != target.
+     *                      Add ints left and right to int[] and return.
+     *              - Time Complexity: O(n)
+     *              - Space Complexity: O(1)
+     *      2)  Binary Search: Search for target. If it exists, tighten the window by checking the left-most and right-most
+     *                      nums if they're equal to target. Add left and right to int[] and return.
+     *                      Else, return {-1, -1}.
+     *              - Time: 9 ms
+     *              - Time Complexity: O(log n)
+     *              - Space Complexity: O(1)
      * 
+     * Variables (2):
+     *      int[] result = {-1, -1}     (default)
+     *      int left = 0
+     *      int right = nums.length - 1
+     *      int mid = left + (right - left) / 2
+     * 
+     * Algorithm (2):
+     *      Initialize result
+     *      Check cases 1 and 2
+     *      Initialize left, right
+     *      Use binary search to find target:
+     *          while left < right
+     *              mid := left + (right - left) / 2
+     *              If nums[mid] == target
+     *                  Tighten left bound:
+     *                      While nums[left] != target
+     *                          left++
+     *                  Tighten right bound:
+     *                      While nums[right] != target
+     *                          right--
+     *                  Set result[0] := left, result[1] := right
+     *                  Return result
+     *              Else if nums[mid] < target
+     *                  Set low := mid + 1
+     *              Else
+     *                  Set high := mid - 1
+     *      Return result (not found)
+     *              
+     * Cases:
+     *      1)  Nums is null or empty (return [-1, -1])
+     *      2)  Nums size is 1+ (see algorithm)
+     *      
      * Test Cases:
      *      1) [] 0                 [-1, -1]
      *      2) [1] 1                [0, 0]
      *      3) [1, 2] 2             [1, 1]
      *      4) [1, 2, 3, 3, 4] 3    [2, 3]
      */
-    public int[] searchRange(int[] nums, int target) {
+	public int[] searchRange(int[] nums, int target) {
         
         int[] result = {-1, -1};
         
-        // Null Check & Empty array & negative target
-        if (nums == null || nums.length == 0 || target < 0) return result;
+        // Case 1
+        if (nums == null || nums.length == 0) return result;
         
-        int index = binarySearch(nums, target, 0, nums.length - 1);
+        // Case 2
+        int left = 0;
+        int right = nums.length - 1;
         
-        // Check if not found
-        if (index < 0) return result;
-        
-        int start = index;
-        int end = index;
-        
-        // Start will end at either 0 OR nums[start] is no longer target
-        while (start > 0 && nums[start - 1] == target) {
-            start--;
-        }
-        
-        // End will end at either the last value in nums OR nums[end] is no longer target
-        while (end < nums.length - 1 && nums[end + 1] == target) {
-            end++;
-        }
-        
-        result[0] = start;
-        result[1] = end;
-        
-        return result;
-    }
-    
-    private int binarySearch(int[] nums, int target, int low, int high) {
-        
-        while (low <= high) {
+        while (left <= right) {
             
-            int mid = (low + high) / 2;
+            int mid = left + (right - left) / 2;
             
-            // Found target, so return its index
-            if (nums[mid] == target) return mid;
-            
-            // Not found
-            // Change low or high
-            if (nums[mid] < target) {
-                low = mid + 1;
-            } else if (nums[mid] > target) {
-                high = mid - 1;
+            if (nums[mid] == target) {
+                
+                while (nums[left] != target) left++;
+                while (nums[right] != target) right--;
+                
+                result[0] = left;
+                result[1] = right;
+                
+                return result;
             }
-            
+            else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
         
-        return -1;      // Not found in nums
+        return result;      // Not found
     }
 }

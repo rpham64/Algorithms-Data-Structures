@@ -1,4 +1,4 @@
-package LeetCode_Medium;
+package Strings;
 
 /**
  * Given an input string, reverse the string word by word.
