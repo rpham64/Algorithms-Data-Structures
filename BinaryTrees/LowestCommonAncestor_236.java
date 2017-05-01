@@ -1,4 +1,6 @@
-package LeetCode;
+package BinaryTrees;
+
+import LeetCode.TreeNode;
 
 /**
  * Given a binary tree, find the lowest common ancestor (LCA) 

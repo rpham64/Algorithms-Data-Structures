@@ -1,7 +1,9 @@
-package LeetCode;
+package BinaryTrees;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import LeetCode.TreeNode;
 
 /**
  * 
@@ -43,25 +45,17 @@ public class BinaryTreePaths_257 {
     
     private void getPaths(TreeNode root, String path, List<String> paths) {
     	
-    	System.out.println("Current: " + root.val);
-    	System.out.println("Current path: " + path);
-        
         // Base Case: if root is a leaf, append path + root.val to paths
         if (root.left == null && root.right == null) {
             paths.add(path + root.val);		// Add path to list
-            System.out.println("Paths after adding current val: " + paths);
         }
         
         // Apply recursion on left and right nodes, if they exist
         if (root.left != null) {
-        	System.out.println("Paths before LEFT: " + paths);
             getPaths(root.left, path + root.val + "->", paths);
-            System.out.println("Paths after LEFT: " + paths);
         }
         if (root.right != null) {
-        	System.out.println("Paths before RIGHT: " + paths);
             getPaths(root.right, path + root.val + "->", paths);
-            System.out.println("Paths after RIGHT: " + paths);
         }
         
     }

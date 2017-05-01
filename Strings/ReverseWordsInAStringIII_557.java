@@ -67,4 +67,50 @@ public class ReverseWordsInAStringIII_557 {
         
         return result.toString();
     }
+    
+    /*
+     * Two Pointers: Using pointer start and end, increment end until end reaches s.length.
+    *                      If char at end is a whitespace or end is at s.length
+    *                          Reverse subtring from start to end-1.
+    *                          Set start := end + 1
+    *                      Increment end
+    *        - Time Complexity: O(n)
+    *        - Space Complexity: O(n)
+    */
+    public String reverseWords2(String s) {
+        
+        // Case 1
+        if (s == null || s.length() < 2) return s;
+        
+        // Case 2
+        char[] letters = s.toCharArray();
+        int start = 0;
+        int end = 0;
+        
+        while (end < s.length()) {
+            
+            if (letters[end] == ' ') {
+                reverse(letters, start, end-1);
+                start = end + 1;
+            }
+            
+            end++;
+        }
+        
+        // Reverse last string (not covered in while loop)
+        reverse(letters, start, end - 1);
+        
+        return String.valueOf(letters);
+    }
+    
+    private void reverse(char[] letters, int start, int end) {
+        while (start < end) {
+            char temp = letters[start];
+            letters[start] = letters[end];
+            letters[end] = temp;
+            
+            start++;
+            end--;
+        }
+    }
 }

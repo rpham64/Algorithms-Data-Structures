@@ -1,6 +1,8 @@
-package LeetCode;
+package BinaryTrees;
 
 import java.util.Stack;
+
+import LeetCode.TreeNode;
 
 /**
  * 

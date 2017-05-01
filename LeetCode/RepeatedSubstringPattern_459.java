@@ -22,7 +22,7 @@ public class RepeatedSubstringPattern_459 {
         
         for (int lengthOfSub = 1; lengthOfSub <= lengthOfString / 2; ++lengthOfSub) {      // Length of substring
             
-            // Check if i is a divisor of n
+            // Check if i is a divisor of n (cuts out majority of lengths that would automatically return false)
             if (lengthOfString % lengthOfSub == 0) {
                 
                 String sub = s.substring(0, lengthOfSub);     // Substring to match

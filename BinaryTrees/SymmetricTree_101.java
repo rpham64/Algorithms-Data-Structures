@@ -1,4 +1,6 @@
-package LeetCode;
+package BinaryTrees;
+
+import LeetCode.TreeNode;
 
 /**
  * 101. Symmetric Tree
