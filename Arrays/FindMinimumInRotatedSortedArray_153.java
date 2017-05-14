@@ -19,39 +19,30 @@ public class FindMinimumInRotatedSortedArray_153 {
 	/** Method: Binary Search. Time: O(log n), Space: O(1) */
 	public int findMin(int[] nums) {
         
-        // Base Case 0
-        if (nums == null || nums.length == 0) return 0;
+        if (nums == null) return 0;
         
-        // Base Case 1
-        if (nums.length == 1) return nums[0];
+        int low = 0;
+        int high = nums.length - 1;
         
-        // Apply binary search to find the minimum
-        return binarySearch(nums, 0, nums.length - 1);
-    }
-    
-    private int binarySearch(int[] nums, int left, int right) {
-        
-        while (left < right) {
+        while (low < high) {
             
-            int mid = (left + right) / 2;
+            int mid = low + (high - low) / 2;
             
-            if (mid > 0 && nums[mid] < nums[mid-1]) {
+            // Rotated => min if nums[min] < nums[min - 1]
+            if (mid > 0 && nums[mid] < nums[mid - 1]) {
                 return nums[mid];
             }
             
-            if (nums[left] <= nums[mid] && nums[mid] > nums[right]) {
-                
-                // Occurs on right
-                left = mid + 1;
-                
+            // Non-rotated => min is at low
+            if (nums[low] < nums[mid] && nums[mid] < nums[high]) {
+                return nums[low];
+            } else if (nums[mid] > nums[high]) {
+                low = mid + 1;
             } else {
-                
-                // Occurs on left
-                right = mid - 1;
-                
+                high = mid - 1;
             }
         }
         
-        return nums[left];
+        return nums[low];
     }
 }
