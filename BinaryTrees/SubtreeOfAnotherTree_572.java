@@ -84,6 +84,12 @@ public class SubtreeOfAnotherTree_572 {
         return false;   // t not found in s
     }
     
+//    private boolean bfs(TreeNode s, TreeNode t) {
+//    	if (s == null) return false;
+//    	if (isSameTree(s, t)) return true;
+//    	return bfs(s.left, t) || bfs(s.right, t);
+//    }
+    
     private boolean isSameTree(TreeNode nodeS, TreeNode nodeT) {
     	
     	// Case 1: Both null

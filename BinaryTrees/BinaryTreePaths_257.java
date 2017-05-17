@@ -35,10 +35,17 @@ public class BinaryTreePaths_257 {
         String path = "";
         List<String> paths = new ArrayList<>();
         
+        if (root == null) return paths;
+        
         // Input Check: if root is NOT null, call getPaths
-        if (root != null) {
-            getPaths(root, path, paths);
-        }
+        getPaths(root, path, paths);
+        
+        // For generating all paths from all nodes
+//        List<String> leftPaths = binaryTreePaths(root.left);
+//        List<String> rightPaths = binaryTreePaths(root.right);
+//        
+//        paths.addAll(leftPaths);
+//        paths.addAll(rightPaths);
         
         return paths;
     }

@@ -447,10 +447,10 @@ public class BinaryTrees {
 	 * @return
 	 */
 	public boolean hasPathSum(int sum) {
-		return hasPathSum(root, sum);
+		return hasPathSum_RECURSIVE(root, sum);
 	}
 	
-	public boolean hasPathSum(TreeNode root, int sum) {
+	public boolean hasPathSum_RECURSIVE(TreeNode root, int sum) {
 		
         // Case 1
         if (root == null) return false;
@@ -462,8 +462,42 @@ public class BinaryTrees {
         
         if (root.left == null && root.right == null && sum == 0) return true;
         
-        return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
+        return hasPathSum_RECURSIVE(root.left, sum) || hasPathSum_RECURSIVE(root.right, sum);
 	}
+	
+	public boolean hasPathSum_ITERATIVE(TreeNode root, int sum) {
+        
+        if (root == null) return false;
+        
+        // Keep two stacks: one for TreeNodes, one for current sum
+        Stack<TreeNode> nodes = new Stack<>();
+        Stack<Integer> sums = new Stack<>();
+        
+        nodes.push(root);
+        sums.push(sum);
+        
+        while (!nodes.empty()) {
+            
+            TreeNode currentNode = nodes.pop();
+            int currentSum = sums.pop();
+            
+            currentSum -= currentNode.val;
+            
+            // If leaf and sum is 0, we found the path
+            if (currentNode.left == null && currentNode.right == null && currentSum == 0) return true;
+            
+            if (currentNode.right != null) {
+                nodes.push(currentNode.right);
+                sums.push(currentSum);
+            }
+            if (currentNode.left != null) {
+                nodes.push(currentNode.left);
+                sums.push(currentSum);
+            }
+        }
+        
+        return false;
+    }
 	
 	/**
 	 * Inverts a binary tree.
