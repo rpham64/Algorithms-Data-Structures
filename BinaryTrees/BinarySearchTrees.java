@@ -2,7 +2,7 @@ package BinaryTrees;
 
 public class BinarySearchTrees {
 
-	private TreeNode root;
+	private final TreeNode root;
 	
 	public BinarySearchTrees() {
 		root = null;
@@ -128,4 +128,65 @@ public class BinarySearchTrees {
 		
 		return successor;
 	}
+	
+	Q1: Binary search tree, implement insert()
+
+	Public void insert(Node root, int val) {
+
+		// Null or empty tree
+		If (root == null) root = new Node(val);
+
+		// If missing child, insert in correct place
+		If (val > root.val) {
+			If (root.right == null) {
+		Root.right = new Node(val);
+	} else {
+		insert(root.right, val);
+	}
+	} else if (val < root.val) {
+		If (root.left == null) {
+			Root.left = new Node(val);
+	} else {
+		insert(root.left, val);
+	}
+	}
+	}
+
+	// return root of the tree
+	Public Node insert(Node root, int val) {
+
+		If (root == null) {
+			Node newNode = new Node(val);
+			Root = newNode;
+			Return newNode;
+	}
+
+		Node current = root;
+		Node newNode = null;
+
+		While (newNode == null) {
+			
+			If (val == current.val) return null;
+
+			If (val > current.val) {
+				If (current.right == null) {
+					newNode = new Node(val);
+					current.right = newNode;
+	} else {
+		Current = current.right;
+	}
+	} else if (val < current.val) {
+		If (current.left == null) {
+	newNode = new Node(val);
+	current.left = newNode;		
+	} else {
+		current= current.left;
+	}
+	}
+
+	}
+
+	Return oldRoot;
+	}
+
 }
