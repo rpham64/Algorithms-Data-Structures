@@ -28,7 +28,7 @@ package Strings;
 public class WordSearch_79 {
 
 	/**
-	 * Time Complexity: O(nm) where n is number of rows, m is number of columns
+	 * Time Complexity: O(nm * 4^(length of word)) where n is number of rows, m is number of columns
 	 * Space Complexity: O(nm) since we created a checked[][]
 	 * 
      * Idea: Scan board for first char of word. Then, check its four adjacent cells for the next char.

@@ -4,7 +4,22 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * A compilation of common algorithms and properties of binary trees.
+ * 
+ * @author Rudolf
+ *
+ */
 public class BinaryTrees {
+	
+	/**
+	 * Terminology:
+	 * 		- Root nodes have depth 0
+	 * 		- Leaf nodes have height 0
+	 * 		- Tree with only one node (root only) has depth and height 0
+	 * 		- Empty tree has height and depth -1 (depends, since some like Leetcode require empty to be 0)
+	 * 
+	 */
 
 	private TreeNode root;	// Root node pointer. Null for empty tree
 	
@@ -79,67 +94,6 @@ public class BinaryTrees {
 //		System.out.println("Depth: " + test.depth());
 //		test.hasPathSum(21);
 	}
-	
-	/**
-	 * Simple implementation of Depth First Search
-	 * 
-	 * @param root
-	 * @return
-	 */
-    public TreeNode DFS(TreeNode root) {
-    	
-    	// Null Check: root is null
-    	if (root == null) return root;
-    	
-    	Stack<TreeNode> stack = new Stack<>();
-    	
-    	stack.push(root);
-    	
-    	while (!stack.isEmpty()) {
-    		
-    		TreeNode current = stack.pop();
-    		
-    		// Do something with current
-    		System.out.println("Current: " + current.val);
-    		
-    		// Add current's children
-    		// If left-to-right, push right, then left
-    		// If right-to-left, push left, then right
-    		if (current.right != null) stack.push(current.right);
-    		if (current.left != null) stack.push(current.left);
-    	}
-    	
-    	return root;
-    }
-    
-    public TreeNode BFS(TreeNode root) {
-    	
-    	// Null Check: root is null
-    	if (root == null) return root;
-    	
-    	Queue<TreeNode> queue = new LinkedList<>();		// Since Queue is abstract and cannot be instantiated
-    	
-    	queue.offer(root);
-    	
-    	while (!queue.isEmpty()) {
-    		
-    		int levelSize = queue.size();		// Number of nodes in current level
-    		
-    		for (int i = 0; i < levelSize; ++i) {
-    			
-    			TreeNode current = queue.poll();
-    			
-    			// Do something with current
-    			System.out.println("Current: " + current.val);
-    			
-    			// Add current's children
-    			if (current.left != null) queue.offer(current.left);
-    			if (current.right != null) queue.offer(current.right);
-    		}
-    	}
-    	
-    	return root;
-    }
 	
 	/**
 	 * Recursive lookup -- given a node, recur down tree
@@ -232,7 +186,14 @@ public class BinaryTrees {
 	}
 	
 	/**
-	 * Number of EDGES from a node to a leaf
+	 * Number of EDGES on the LONGEST PATH from a node to a leaf
+	 * 
+	 * Note: The height of a TREE is the height of its root node (max height)
+	 * 
+	 * Cases:
+	 * 		1)	Empty tree (return -1)
+	 * 		2)	Root only (return 0)
+	 * 		3)	1 or 2 children
 	 * 
 	 * @return
 	 */
@@ -242,8 +203,11 @@ public class BinaryTrees {
 	
 	public int height(TreeNode root) {
 		
-		// Null Check
+		// Case 1
 		if (root == null) return -1;
+		
+		// Case 2
+		if (root.left == null && root.right == null) return 0;
 		
 		return 1 + Math.max(height(root.left), height(root.right));
 	}
@@ -357,6 +321,81 @@ public class BinaryTrees {
         return depth;
 		
 	}
+	
+	/**
+     * Breadth-First Search/Traversal
+     * 
+     * Time Complexity: O(n) where n is the number of TreeNodes
+     * Space Complexity: O(w) where w is the maximum width of the tree
+     * 
+     * @param root
+     * @return
+     */
+    public TreeNode BFS(TreeNode root) {
+    	
+    	// Null Check: root is null
+    	if (root == null) return root;
+    	
+    	Queue<TreeNode> queue = new LinkedList<>();		// Since Queue is abstract and cannot be instantiated
+    	
+    	queue.offer(root);
+    	
+    	while (!queue.isEmpty()) {
+    		
+    		int levelSize = queue.size();		// Number of nodes in current level
+    		
+    		for (int i = 0; i < levelSize; ++i) {
+    			
+    			TreeNode current = queue.poll();
+    			
+    			// Do something with current
+    			System.out.println("Current: " + current.val);
+    			
+    			// Add current's children
+    			if (current.left != null) queue.offer(current.left);
+    			if (current.right != null) queue.offer(current.right);
+    		}
+    	}
+    	
+    	return root;
+    }
+	
+	/**
+	 * Depth First Search/Traversal
+	 * 
+	 * Three choices: Preorder, Inorder, Postorder
+	 * 
+	 * Time Complexity: O(n) where n is the number of TreeNodes
+	 * Space Complexity: O(h) where h is the height of the tree
+	 * 
+	 * @param root
+	 * @return
+	 */
+    public TreeNode DFS(TreeNode root) {
+    	
+    	// Null Check: root is null
+    	if (root == null) return root;
+    	
+    	Stack<TreeNode> stack = new Stack<>();
+    	
+    	stack.push(root);
+    	
+    	while (!stack.isEmpty()) {
+    		
+    		TreeNode current = stack.pop();
+    		
+    		// Do something with current
+    		System.out.println("Current: " + current.val);
+    		
+    		// Add current's children
+    		// If left-to-right, push right, then left
+    		// If right-to-left, push left, then right
+    		if (current.right != null) stack.push(current.right);
+    		if (current.left != null) stack.push(current.left);
+    	}
+    	
+    	return root;
+    }
 		
 	/**
 	 * Inorder Tree Traversal
@@ -604,6 +643,9 @@ public class BinaryTrees {
     /**
      * Similar to max and min depth of binary tree, except taking difference in depths of left and right subtrees
      * 
+     * Time Complexity: O(n log n) average, O(n^2) worst
+     * Space Complexity: O(1)
+     * 
      * Cases:
      *      1) Empty tree
      *          - Depth = 0     =>      True
@@ -624,10 +666,9 @@ public class BinaryTrees {
         // Case 3
         int leftDepth = depth(root.left);
         int rightDepth = depth(root.right);
+        int diff = Math.abs(leftDepth - rightDepth);
         
-        if (Math.abs(leftDepth - rightDepth) <= 1 && isBalanced(root.left) && isBalanced(root.right)) return true;
-        
-        return false;   // Not balanced
+        return diff <= 1 && isBalanced(root.left) && isBalanced(root.right);
     }
     
     /**

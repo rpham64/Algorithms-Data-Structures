@@ -6,6 +6,9 @@ import java.util.List;
 /**
  * Generates all permutations of a given string.
  * 
+ * Time Complexity: O(n * n!) (There are n! permutations, and it takes O(n) time to print a single permutation
+ * Space Complexity: O(n!)
+ * 
  * Explanation (from CTCI): 
  * 
  * We generate all permutations of a string S1...Sn by "chopping off" the last character and

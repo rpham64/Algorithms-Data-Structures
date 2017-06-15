@@ -1,5 +1,7 @@
 package Strings;
 
+import java.util.HashSet;
+
 /**
  * A template that can solve most "find substring satisfying some restriction from a larger string".
  * 

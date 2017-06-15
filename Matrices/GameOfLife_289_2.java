@@ -1,4 +1,4 @@
-package LeetCode;
+package Matrices;
 
 public class GameOfLife_289_2 {
 	

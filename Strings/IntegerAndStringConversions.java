@@ -1,8 +1,12 @@
 package Strings;
 
+import java.util.HashMap;
+
 /**
- * Formula: digit (int) = char - '0'
- * 			char = digit + '0'
+ * Formula: digit (int) = char - '0'		(ex: 5 => '5')
+ * 			char = digit + '0'				(ex: '5' => 5)
+ * 
+ * For converting char into a digit in range 0 - 25 (0-51 for all cases): int = char - 'a'
  * 
  * @author Rudolf
  *
@@ -129,7 +133,6 @@ public class IntegerAndStringConversions {
 		System.out.println(num3 + " to String: " + intToStr(num3));
 		System.out.println(num4 + " to String: " + intToStr(num4));
 		System.out.println(num5 + " to String: " + intToStr(num5));
-		
 	}
 	
 	
