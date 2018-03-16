@@ -7,6 +7,61 @@ import java.util.Stack;
 /**
  * A compilation of common algorithms and properties of binary trees.
  * 
+ * Definitions
+ * 
+ * Source: https://en.wikipedia.org/wiki/Tree_%28data_structure%29
+ * 
+ * Root
+ * The top node in a tree.
+ * 
+ * Child
+ * A node directly connected to another node when moving away from the Root.
+ * 
+ * Parent
+ * The converse notion of a child.
+ * 
+ * Siblings
+ * A group of nodes with the same parent.
+ * 
+ * Descendant
+ * A node reachable by repeated proceeding from parent to child.
+ * 
+ * Ancestor
+ * A node reachable by repeated proceeding from child to parent.
+ * 
+ * Leaf
+ * (less commonly called External node)
+ * A node with no children.
+ * 
+ * Branch
+ * 
+ * Internal node
+ * A node with at least one child.
+ * 
+ * Degree
+ * The number of subtrees of a node.
+ * 
+ * Edge
+ * The connection between one node and another.
+ * 
+ * Path
+ * A sequence of nodes and edges connecting a node with a descendant.
+ * 
+ * Level
+ * The level of a node is defined by 1 + (the number of connections between the node and the root).
+ * 
+ * Height of node
+ * The height of a node is the number of edges on the longest path between that node and a leaf.
+ * 
+ * Height of tree
+ * The height of a tree is the height of its root node.
+ * 
+ * Depth
+ * The depth of a node is the number of edges from the tree's root node to the node.
+ * 
+ * Forest
+ * A forest is a set of n >= 0 disjoint trees.
+ * 
  * @author Rudolf
  *
  */
@@ -45,6 +100,12 @@ public class BinaryTrees {
 	public static void main(String[] args) {
 		
 		/**
+		 * Source: https://stackoverflow.com/a/2603707
+		 * 
+		 * Definitions (for a node)
+		 * 		- Depth: Number of edges from node to root node.
+		 * 		- Height: Number of edges on the LONGEST PATH from node to a leaf node.
+		 * 
 		 * Tree Example:
 		 * 				8			- Depth 0, Height 3
 		 * 			   / \
@@ -53,7 +114,6 @@ public class BinaryTrees {
 		 *          1   6   14      - Depth 2, Height 1	(height of 1 is 0)
 		 *             / \  /
 		 *            4  7 13		- Depth 3, Height 0
-		 *            
 		 *            
 		 *	Height (max) = 3
 		 *	Depth (max) = 3
