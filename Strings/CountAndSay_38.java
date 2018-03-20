@@ -1,4 +1,4 @@
-package LeetCode;
+
 
 /**
  * The count-and-say sequence is the sequence of integers beginning as follows:
@@ -75,4 +75,61 @@ public class CountAndSay_38 {
         
         return result;
     }
+    
+    /**
+     *   Algorithm
+     *       Set string := "1"
+     *       Set counter := 1
+     *       While counter < n
+     *           Print string
+     *           Increment counter
+     *       Return string
+     *
+     *   print String Algorithm (Input: String, Output: new String)
+     *       Create new StringBuilder
+     *       Set count := 1
+     *       Set say := char(0)
+     *
+     *       For index i from 1 upto string.length - 1
+     *           If say does not equal current char
+     *               Append count and say to stringbuilder
+     *               Set count := 1
+     *               Set say := current char
+     *           Else
+     *               Increment count
+     *       Append count and say to stringbuilder
+     *       Return string
+     */
+     public String countAndSay2(int n) {
+         String result = "1";
+         int counter = 1;
+         
+         while (counter < n) {
+             result = getNewResult(result);
+             counter++;
+         }
+         
+         return result;
+     }
+     
+     private String getNewResult(String result) {
+         if (result == null || result.length() == 0) return "";
+         
+         StringBuilder builder = new StringBuilder();
+         int count = 1;
+         char say = result.charAt(0);
+         
+         for (int i = 1; i < result.length(); ++i) {
+             if (say != result.charAt(i)) {
+                 builder.append(count).append(say);
+                 count = 1;
+                 say = result.charAt(i);
+             } else {
+                 count++;
+             }
+         }
+         
+         builder.append(count).append(say);
+         return builder.toString();
+     }
 }
