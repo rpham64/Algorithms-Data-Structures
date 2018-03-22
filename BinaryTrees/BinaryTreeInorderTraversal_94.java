@@ -1,4 +1,4 @@
-package LeetCode_Medium;
+package BinaryTrees;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,13 +93,13 @@ public class BinaryTreeInorderTraversal_94 {
 	public List<Integer> inorderTraversal_ITERATIVE(TreeNode root) {
         
         List<Integer> nodes = new ArrayList<Integer>();
-        Stack<TreeNode> stack = new Stack<TreeNode>();
         
         // Input Check: empty tree
         if (root == null) return nodes;
         
         TreeNode current = root;
-        
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+
         // Repeatedly push leftmost nodes to stack
         while (current != null) {
             stack.push(current);
@@ -113,6 +113,7 @@ public class BinaryTreeInorderTraversal_94 {
             // Add current to nodes list
             nodes.add(current.val);
             
+            // If current's right node exists, set current to that node.
             if (current.right != null) {
                 
                 current = current.right;

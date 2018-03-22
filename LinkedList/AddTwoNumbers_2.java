@@ -15,35 +15,31 @@ public class AddTwoNumbers_2 {
 
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
-        // Input Check: empty lists
-        if (l1 == null && l2 == null) return l1;
-        
-        ListNode p1 = l1;
-        ListNode p2 = l2;
         ListNode dummy = new ListNode(0);
         ListNode current = dummy;
-        int sum = 0;
+        int sum = 0; // Running Sum (carry + l1.val + l2.val)
         
-        while (p1 != null || p2 != null) {      // Why use OR: If p1 or p2 is null, keep iterating.
-                                                // Can't assume both lists are same size
-            if (p1 != null) {
-                sum += p1.val;
-                p1 = p1.next;
+        while (l1 != null || l2 != null) {      // Why use OR: If p1 or p2 is null, keep iterating.
+                                                // Covers both cases of l1 and l2 being same or different length.
+        	sum /= 10;
+        	
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
             }
-            if (p2 != null) {
-                sum += p2.val;
-                p2 = p2.next;
+            if (l2 != null) {
+                sum += l2.val;
+                l2 = l2.next;
             }
             
-            ListNode digit = new ListNode(sum % 10);    // Can be 1 or 2 digits. If 2 digits, carry 1 in sum
-            current.next = digit;
+            // Since sum can be greater than or equal to 10, use % 10 to get a single digit.
+            current.next = new ListNode(sum % 10);
             current = current.next;
-            
-            sum /= 10;
         }
         
-        // Check: sum == 1
-        if (sum == 1) {
+        // Check if sum >= 10.
+        // If so, we need to take care of the last carry.
+        if (sum / 10 == 1) {
             current.next = new ListNode(1);
         }
         

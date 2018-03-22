@@ -1,4 +1,4 @@
-package LeetCode_Medium;
+package BinaryTrees;
 
 import java.util.LinkedList;
 import java.util.List;

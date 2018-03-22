@@ -106,6 +106,10 @@ public class BinaryTrees {
 		 * 		- Depth: Number of edges from node to root node.
 		 * 		- Height: Number of edges on the LONGEST PATH from node to a leaf node.
 		 * 
+		 * Simple way to think about depth and height:
+		 * 		- Depth goes DOWN from root to node.
+		 * 		- Height goes UP from leaf to node.
+		 * 
 		 * Tree Example:
 		 * 				8			- Depth 0, Height 3
 		 * 			   / \

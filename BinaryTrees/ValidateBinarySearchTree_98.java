@@ -32,7 +32,7 @@ import java.util.List;
 public class ValidateBinarySearchTree_98 {
 
 	/**
-	 * Optimal Solution
+	 * Optimal Recursion Solution
 	 * 
 	 * Time Complexity: O(n)
 	 * Space Complexity: O(1)
@@ -41,7 +41,7 @@ public class ValidateBinarySearchTree_98 {
 	 * @return
 	 */
 	public boolean isValidBST(TreeNode root) {
-        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);        // Case of Integer overflow...
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);  // Case of Integer overflow...
     }
     
     /**
@@ -51,11 +51,8 @@ public class ValidateBinarySearchTree_98 {
      *      Right => [root.val, maxVal]
      */
     private boolean isValidBST(TreeNode root, long minValue, long maxValue) {
-        
         if (root == null) return true;
-        
         if (root.val <= minValue || root.val >= maxValue) return false;
-        
         return isValidBST(root.left, minValue, root.val) && isValidBST(root.right, root.val, maxValue);
     }
 	
