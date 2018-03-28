@@ -25,29 +25,26 @@ Return 24.
 public class SumOfLeftLeaves_404 {
 
 	/**
-	 * Solution #1 - Recursive
+	 * Time: O(n) where n is the number of nodes in the tree.
+	 * Space: O(1)
 	 * 
 	 * @param root
 	 * @return
 	 */
-	public int sumOfLeftLeaves(TreeNode root) {
-        
-        // Null check
+    public int sumOfLeftLeaves(TreeNode root) {
         if (root == null) return 0;
         
         int sum = 0;
         
-        if (root.left != null) {
-            
-            // Left child is a leaf
-            if (root.left.left == null && root.left.right == null) sum += root.left.val;
-            else sum += sumOfLeftLeaves(root.left);
-            
+        // Add root's left val to sum if left leaf.
+        if (root.left != null && root.left.left == null && root.left.right == null) {
+            sum += root.left.val;
         }
         
-        if (root.right != null) sum += sumOfLeftLeaves(root.right);
-        
-        return sum;
+        // Add sum at root 
+        //				+ sum of left leaves in left subtree 
+        //				+ sum of left leaves in right subtree
+        return sum + sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
     }
 	
 	/**
