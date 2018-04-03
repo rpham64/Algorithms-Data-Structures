@@ -33,72 +33,41 @@ public class ThreeSum_15 {
      * Idea: Iterate through each num in nums and apply Two Sum (review question) on rest of array.
      *      Using the two sum result, determine if it equals the compliment of the current num (ie. sum = -current).
      *      If so, the sum of all three numbers is 0, hence add them to the result.
-     * 
-     * Variables:
-     *      List<List<Integer>> result
-     * 
-     * Algorithm:
-     *      Sort nums[]
-     *      Loop for int i from 0 to n - 3
-     *          If i > 0 AND nums[i] == nums[i-1] continue      (skip duplicates)
-     *          Set low := i + 1
-     *              high := n - 1
-     *          Loop while low < high
-     *              Set sum := nums[low] + nums[high]
-     *              If sum == -nums[i]
-     *                  Create new ArrayList and add nums[i], nums[low], nums[high]
-     *                  Add arrayList to result list
-     *                  Skip duplicates: 
-     *                      Loop while low < high and nums[low] == nums[low + 1]
-     *                          Increment low
-     *                      Loop while low < high and nums[high] == nums[high - 1]
-     *                          Decrement high
- *                  Else if sum > -nums[i]
- *                      Decrement high
- *                  Else
- *                      Increment low
- *          Return result
-     * 
-     * Cases:
-     *      1)  Null or length < 3 (return empty list)
-     *      2)  Length 3+ (see algo)
-     * 
      */
-    public List<List<Integer>> threeSum(int[] nums) {
-    	
+	public List<List<Integer>> threeSum(int[] nums) {
+        if (nums == null || nums.length < 3) return new ArrayList<>();
+        
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
         
-        for (int i = 0; i < nums.length; ++i) {
-            
+        for (int i = 0; i <= nums.length - 3; ++i) {
             if (i > 0 && nums[i] == nums[i-1]) continue;
             
-            int low = i + 1;
-            int high = nums.length - 1;
-            int complement = nums[i] * -1;
+            int current = nums[i];
+            int left = i + 1;
+            int right = nums.length - 1;
             
-            while (low < high) {
+            while (left < right) {
+                int sum = current + nums[left] + nums[right];
                 
-                int sum = nums[low] + nums[high];
-                
-                if (sum == complement) {
+                if (sum == 0) {
+                    // Found a solution set
+                    result.add(Arrays.asList(current, nums[left], nums[right]));
                     
-                    result.add(Arrays.asList(nums[i], nums[low], nums[high]));
+                    // Move left and right pointers
+                    left++;
+                    right--;
                     
-                    // Skip duplicates
-                    while (low < high && nums[low] == nums[low+1]) {
-                        low++;
-                    }
-                    while (low < high && nums[high] == nums[high-1]) {
-                        high--;
-                    }
-                    low++;
-                    high--;
+                    // Skip duplicates from left and right, if they exist
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right + 1]) right--;
                     
-                } else if (sum > complement) {
-                    high--;
+                } else if (sum > 0) {
+                    // Too big, so move right pointer.
+                    right--;
                 } else {
-                    low++;
+                    // Too small, so move left pointer.
+                    left++;
                 }
             }
         }
