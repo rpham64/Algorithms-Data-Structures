@@ -2,28 +2,53 @@ package LinkedList;
 
 import java.util.Stack;
 
+/**
+ * Given a singly linked list, determine if it is a palindrome.
+	
+	Follow up:
+	Could you do it in O(n) time and O(1) space?
+ * 
+ * Source: https://leetcode.com/problems/palindrome-linked-list/description/
+ * 
+ * @author Rudolf
+ *
+ */
 public class PalindromeLinkedList_234 {
 
 	/** Method 1 - Time: O(n), Space: O(1) */
 	public boolean isPalindrome(ListNode head) {
-        
-        // Input Check: empty list OR 1 node
         if (head == null || head.next == null) return true;
         
-        // 1) Find middle of list
-        ListNode fast = head;
-        ListNode slow = head;
+        // Find middle
+        ListNode p1 = head;
+        ListNode p2 = head;
         
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
+        while (p2 != null && p2.next != null) {
+            p1 = p1.next;
+            p2 = p2.next.next;
         }
         
-        // Slow is now at middle of list
+        // Reverse second half, starting at p1
+        ListNode rightHead = reverse(p1);
         
-        // 2) Reverse second half of list
+        // Compare leftHead and rightHead until they're different (false)
+        // or one becomes null (true)
+        ListNode leftHead = head;
+        
+        while (leftHead != null && rightHead != null) {
+            if (leftHead.val != rightHead.val) return false;
+            leftHead = leftHead.next;
+            rightHead = rightHead.next;
+        }
+        
+        return true;
+    }
+    
+    private ListNode reverse(ListNode head) {
+        if (head == null) return head;
+        
+        ListNode current = head;
         ListNode prev = null;
-        ListNode current = slow;
         ListNode next = null;
         
         while (current != null) {
@@ -33,23 +58,7 @@ public class PalindromeLinkedList_234 {
             current = next;
         }
         
-        // 3) Check both first and second halves until p1 reaches otherHead
-        ListNode p1 = head;
-        ListNode p2 = prev;
-        
-        while (p2 != null) {
-            if (p1.val != p2.val) {
-                return false;
-            }
-            
-            // Re-assign p1 and p2
-            p1 = p1.next;
-            p2 = p2.next;
-        }
-        
-        // 4) Optional: Re-reverse second half back to original list
-        
-        return true;
+        return prev;
     }
 	
 	/** Method 2 - Time: O(n), Space: O(n) */
