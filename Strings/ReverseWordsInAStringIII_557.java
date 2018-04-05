@@ -113,4 +113,31 @@ public class ReverseWordsInAStringIII_557 {
             end--;
         }
     }
+    
+    /**
+     * Implementation on 4/4/18.
+     * 
+     * Time Complexity: O(len(words) * len(word in words[])) = O(n) where n is the number of characters in s.
+     * Space Complexity: O(n) where n is the number of characters in s.
+     * 
+     * @param s
+     * @return
+     */
+    public String reverseWords3(String s) {
+        if (s == null || s.length() == 0) return s;
+        
+        String[] words = s.split(" ");
+        
+        // Reverse each string in words
+        for (int i = 0; i < words.length; ++i) {
+            words[i] = new StringBuilder(words[i]).reverse().toString();
+        }
+        
+        StringBuilder builder = new StringBuilder(words[0]);
+        for (int i = 1; i < words.length; ++i) {
+            builder.append(" ").append(words[i]);
+        }
+        
+        return builder.toString();
+    }
 }

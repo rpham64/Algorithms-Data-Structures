@@ -34,6 +34,9 @@ public class PalindromicSubstrings_647 {
 	/**
 	 * Brute Force solution.
 	 * 
+	 * Time: O(n^2)
+	 * Space: O(1)
+	 * 
 	 * Iterate through each character of s and, using the current character as the
 	 * "middle of a palindrome", increment count and extend the palindrome.
 	 * 

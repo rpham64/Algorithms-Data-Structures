@@ -24,8 +24,6 @@ import java.util.Arrays;
  *
  */
 public class Counting {
-
-	private int[] data;
 	
 	public static int[] sort(int[] data) {
 		
@@ -65,11 +63,41 @@ public class Counting {
 		
 	}
 	
+	public static int[] sort2(int[] data) {
+		int[] sorted = new int[data.length];  // O(n) extra space.
+		int counter = 0;
+		
+		// Find maximum of data.
+		int max = Integer.MIN_VALUE;
+		
+		for (int num : data) {
+			max = Math.max(max, num);
+		}
+		
+		// Create new count[] with size max+1
+		int[] count = new int[max + 1];  // O(k) extra space.
+		
+		// Iterate through data and increment count for the respective number.
+		// This takes O(n).
+		for (int num : data) {
+			count[num]++;
+		}
+		
+		// Iterate through the count[] and, if value is greater than 0, add the index to sorted[].
+		// This takes O(k).
+		for (int i = 0; i < count.length; ++i) {
+			if (count[i] > 0) sorted[counter++] = i;
+		}
+		
+		// Return sorted[]
+		return sorted;
+	}
+	
 	public static void main(String[] args) {
 		
 		int[] data = {64, 25, 12, 22, 11, 1, 5, 8, 20, 50, 35, 75, 24, 15, 92, 81, 40};
 		
-		data = sort(data);
+		data = sort2(data);
 		System.out.println("Sorted: " + Arrays.toString(data));
 	}
 	
