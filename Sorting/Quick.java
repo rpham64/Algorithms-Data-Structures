@@ -26,8 +26,6 @@ import java.util.Arrays;
  *
  */
 public class Quick {
-
-	private int[] data;
 	
 	/**
 	 * Quick Sort method
@@ -76,17 +74,17 @@ public class Quick {
 	private static int partition(int[] data, int start, int end) {
 		
 		int pivot = data[end];	// Can change to any element
-		int i = start - 1;
+		int i = start;
 		
-		for (int curr = start; curr < end; curr++) {
-			if (data[curr] < pivot) {
+		for (int index = start; index < end; index++) {
+			if (data[index] < pivot) {
+				swap(data, i, index);
 				i++;
-				swap(data, i, curr);
 			}
 		}
 		
-		swap(data, i+1, end);
-		return i+1;
+		swap(data, i, end);
+		return i;
 	}
 	
 	/**
@@ -105,10 +103,14 @@ public class Quick {
 	public static void main(String[] args) {
 		
 		int[] data = {64, 25, 12, 22, 11, 1, 5, 8, 20, 50, 35, 75, 24, 15, 92, 81, 40};
+		int[] sorted = Arrays.copyOf(data, data.length);
+		Arrays.sort(sorted);
+		
+		System.out.println("Data: " + Arrays.toString(data));
+		System.out.println("Sorted Array: " + Arrays.toString(sorted));
 		
 		sort(data);
-		System.out.println("Sorted: " + Arrays.toString(data));
-		
+		System.out.println("Sorted: " + Arrays.equals(data, sorted));
 	}
 
 }

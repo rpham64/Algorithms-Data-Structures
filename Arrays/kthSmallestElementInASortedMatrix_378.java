@@ -29,7 +29,7 @@ public class kthSmallestElementInASortedMatrix_378 {
 	/**
 	 * Solution 1: Priority Queue
 	 * 
-	 * Time Complexity: O(n^2 * log n)
+	 * Time Complexity: O(n^2 * log n^2)
 	 * Space Complexity: O(n^2)
 	 * 
 	 * @param matrix
