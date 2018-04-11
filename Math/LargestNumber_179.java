@@ -2,6 +2,7 @@ package Math;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  * Given a list of non negative integers, arrange them such that they form the largest number.
@@ -60,5 +61,26 @@ public class LargestNumber_179 {
         for (String number : numbers) builder.append(number);
         
         return builder.toString();
+    }
+    
+    public static void main(String[] args) {
+    	
+    	int[] nums = {1, 2, 3, 4, 5};
+    	Random random = new Random();
+    	
+    	for (int i = 0; i < nums.length; ++i) {
+    		int randomPosition = random.nextInt(nums.length);
+    		System.out.println("Random Position: " + randomPosition);
+    		swap(nums, i, randomPosition);
+    		System.out.println("Randomized Array after position " + randomPosition + Arrays.toString(nums));
+    	}
+    	
+    	System.out.println("Randomized: " + Arrays.toString(nums));
+    }
+    
+    private static void swap(int[] nums, int i, int j) {
+    	int temp = nums[i];
+    	nums[i] = nums[j];
+    	nums[j] = temp;
     }
 }
