@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 
 public class Atheer {
 
 	import java.util.ArrayList;
 	import java.util.List;
 
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+public class Atheer {
+
+>>>>>>> Added Tree problem from Ather
 	/*
 
 	Given a binary tree of integers, write code to store the tree into a list of integers and recreate the original tree from a list of integers. 
@@ -78,4 +86,8 @@ public class Atheer {
 	    
 	    return root;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> Added Tree problem from Ather
 }
