@@ -1,4 +1,4 @@
-package LeetCode_Medium;
+
 
 import java.util.Stack;
 
@@ -28,52 +28,39 @@ import LeetCode.TreeNode;
 public class kthSmallestElementInBST_230 {
 
 	/**
-	 * Idea: Use inorder tree traversal and keep a counter.
-	 * 		Inorder tree traversal for BST returns the values in sorted order.
-	 * 		When counter == k, return the current node's value.
-	 * 
-	 * @param root
-	 * @param k
-	 * @return
-	 */
-	public int kthSmallest(TreeNode root, int k) {
-        
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        
-        // Input Check: empty tree
-        if (root == null) return -1;
-        
-        int counter = 0;    // smallest = 1, 2nd smallest = 2, etc.
-        
+    *   1) Traverse BST with size-restricted Priority Queue
+    *       - Time: O(n log k)
+    *       - Space: O(k + 1) = O(k)
+    *   2) Inorder Traversal Iteratively while decrementing k. Return current key if --k == 0.
+    *       - Time: O(n) where n is the number of nodes in the BST.
+    *       - Space: O(1)
+    */
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
         TreeNode current = root;
         
-        // Add leftmost nodes to stack
+        // Iteratively push leftmost nodes to stack.
         while (current != null) {
             stack.push(current);
             current = current.left;
         }
         
-        while (!stack.empty()) {
-            
+        while (!stack.isEmpty()) {
             current = stack.pop();
             
-            // Increment and check counter
-            if (++counter == k) return current.val;
+            // Decrement k.
+            // If k == 0, we found the kth smallest element in the BST.
+            if (--k == 0) return current.val;
             
-            // Search for successor
-            // If right is NOT null, find the min value in the right subtree
-            // Else, the successor is the next to-be-popped node on the stack
             if (current.right != null) {
-                
                 current = current.right;
                 
+                // Iteratively push leftmode nodes to stack.
                 while (current != null) {
                     stack.push(current);
                     current = current.left;
                 }
-                
             }
-            
         }
         
         return -1;  // Not found
