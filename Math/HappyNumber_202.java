@@ -24,35 +24,39 @@ import java.util.HashSet;
  */
 public class HappyNumber_202 {
 
+	/**
+	 * HashSet + Calculations Algorithm
+	 * 
+	 * Time: O(n) (???)
+	 * Space: O(n) (???????????????)
+	 * 
+	 * @param n
+	 * @return
+	 */
 	public boolean isHappy(int n) {
-        if (n == 1) return true;
+        if (n < 1) return false;  // Out of range.
         
         HashSet<Integer> visited = new HashSet<>();
         
-        while (!visited.contains(n)) {
+        while (n != 1) {
+            if (visited.contains(n)) return false;
             
             visited.add(n);
-            
             n = getSum(n);
-            
-            // Check if sum equals 1
-            if (n == 1) {
-                return true;
-            }
         }
         
-        return false;
+        return true;  // n is a happy number.
     }
     
+    // % 10 = last digit
+    // / 10 = kicks out last digit
     private int getSum(int n) {
         int sum = 0;
-            
-        // Sum squares of digits
-        while (n != 0) {
-            sum += (n % 10) * (n % 10);  // Square last digit and add to sum.
-            n /= 10;  // Remove last digit from n.
+        while (n > 0) {
+            int lastDigit = n % 10;
+            sum += (lastDigit * lastDigit);
+            n /= 10;
         }
-        
         return sum;
     }
 }

@@ -71,4 +71,29 @@ public class FindBottomLeftTreeValue_513 {
         
         return leftValue;   // Not found
     }
+    
+    /**
+     * Right-to-left BFS
+     * 
+     * @param root
+     * @return
+     */
+    public int findBottomLeftValue2(TreeNode root) {
+        TreeNode current = root;
+        Queue<TreeNode> queue = new LinkedList<>();
+        
+        queue.offer(root);
+        
+        while (queue.size() > 0) {
+        	
+        	// Keeps track of every node in the tree until we're left with the leftmost node at the last level.
+            current = queue.poll();
+            
+            // Add right child , then left child.
+            if (current.right != null) queue.offer(current.right);
+            if (current.left != null) queue.offer(current.left);
+        }
+        
+        return current.val;
+    }
 }
