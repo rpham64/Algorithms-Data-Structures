@@ -24,25 +24,37 @@ import java.util.List;
  */
 public class Combinations_77 {
 
+	/**
+	 * Backtracking Algorithm
+	 * 
+	 * Time: O(n * (n choose k)) = O(n * (n! / (k!)(n-k)!)) where n is the upper bound in range of numbers, and k is the size of the subsets.
+	 * 		- This is because according to the combinations formula, there are O(n choose k) combinations, and it takes n time to generate each combination.
+	 * Space: O(n choose k) as they're all stored within the result list.
+	 * 
+	 * 
+	 * @param n
+	 * @param k
+	 * @return
+	 */
 	public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> result = new ArrayList<>();
-        getList(result, n, k, 1, new ArrayList<>());
+        if (k == 0) return result;
+        generateCombinations(result, new ArrayList<>(), 1, n, k);
         return result;
     }
     
-    private void getList(List<List<Integer>> result, int n, int k, int start, List<Integer> tempList) {
-        
-        if (tempList.size() == k) {
-            result.add(new ArrayList<>(tempList));
-        } else if (tempList.size() < k) {   // Build tempList
-            
-            for (int i = start; i <= n; ++i) {
-                tempList.add(i);
-                getList(result, n, k, i + 1, tempList);
-                tempList.remove(tempList.size() - 1);
-            }
-            
+    private void generateCombinations(List<List<Integer>> result, List<Integer> subList, int current, int max, int k) {
+        // Termination
+        if (subList.size() == k) {
+            result.add(new ArrayList<>(subList));
+            return;
         }
         
+        // Recursion
+        for (int num = current; num <= max; ++num) {
+            subList.add(num);
+            generateCombinations(result, subList, num + 1, max, k);
+            subList.remove(subList.size() - 1);
+        }
     }
 }
